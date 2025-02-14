@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="VehicleTest" project="Pr-tp2" tests="6" started="6" failures="1" errors="0" ignored="0">
+  <testsuite name="simulator.model.VehicleTest" time="0.008" displayname="VehicleTest" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]">
+    <testcase name="test_1" classname="simulator.model.VehicleTest" time="0.0" displayname="test_1()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:test_1()]">
+      <failure>
+        <expected>true</expected>
+        <actual>false</actual>
+        org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)&#13;
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)&#13;
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)&#13;
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)&#13;
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)&#13;
+	at simulator.model.VehicleTest.test_1(VehicleTest.java:153)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+&#13;
+
+      </failure>
+    </testcase>
+    <testcase name="test_report" classname="simulator.model.VehicleTest" time="0.0" displayname="test_report()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:test_report()]"/>
+    <testcase name="getset_test_speed" classname="simulator.model.VehicleTest" time="0.002" displayname="getset_test_speed()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:getset_test_speed()]"/>
+    <testcase name="error_handling" classname="simulator.model.VehicleTest" time="0.002" displayname="error_handling()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:error_handling()]"/>
+    <testcase name="test_iterinary_is_readonly" classname="simulator.model.VehicleTest" time="0.001" displayname="test_iterinary_is_readonly()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:test_iterinary_is_readonly()]"/>
+    <testcase name="getset_contamination_class" classname="simulator.model.VehicleTest" time="0.001" displayname="getset_contamination_class()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:getset_contamination_class()]"/>
+  </testsuite>
+</testrun>
