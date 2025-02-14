@@ -1,0 +1,148 @@
+package simulator.model;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class RoadMap {
+
+	private List<Junction> _junctions;
+	private List<Road> _roads;
+	private List<Vehicle> _vehicles;
+	private Map<String, Junction> _juncMap;
+	private Map<String, Road> _roadMap;
+	private Map<String, Vehicle> _vehicleMap;
+
+	RoadMap() {
+
+		this._junctions = new ArrayList<Junction>();
+		this._roads = new ArrayList<Road>();
+		this._vehicles = new ArrayList<Vehicle>();
+		this._juncMap = new HashMap<String, Junction>();
+		this._roadMap = new HashMap<String, Road>();
+		this._vehicleMap = new HashMap<String, Vehicle>();
+	}
+
+	public void addJunction(Junction j) throws IllegalArgumentException {
+		for (Junction j1 : _junctions) {
+			if (j1.getId().equals(j.getId())) {
+				throw new IllegalArgumentException("Ya existe un cruce con este id");
+			}
+		}
+		_junctions.add(j);
+		_juncMap.put(j.getId(), j);
+	}
+
+	public void addRoad(Road r) throws IllegalArgumentException {
+		for (Road r1 : _roads) {
+			if (r1.getId().equals(r.getId())) {
+				throw new IllegalArgumentException("Ya existe una carretera con este id");
+			}
+		}
+
+		if (!_roadMap.containsKey(r.getSrc().getId()) || !_roadMap.containsKey(r.getDest().getId())) {
+			throw new IllegalArgumentException("No existe esta carretera en el mapa");
+		}
+
+		_roads.add(r);
+		_roadMap.put(r.getId(), r);
+	}
+
+	public void addVehicle(Vehicle v) {
+		for (Vehicle v1 : _vehicles) {
+			if (v1.getId().equals(v.getId())) {
+				throw new IllegalArgumentException("Ya existe un vehiculo con este id");
+			}
+		}
+
+		List<Junction> itinerary = v.getItinerary();
+		int i;
+		for (i = 0; i < itinerary.size(); i++) {
+			if (v.getRoad().getSrc() == itinerary.get(i) && v.getRoad().getDest() != itinerary.get(i + 1)) {
+				throw new IllegalArgumentException("El itinerario de cruces no es válido");
+			}
+		}
+	}
+
+	public Junction getJunction(String id) {
+		if (_juncMap.containsKey(id)) {
+			return _juncMap.get(id);
+		} else {
+			return null;
+		}
+	}
+
+	public Road getRoad(String id) {
+		if (_roadMap.containsKey(id)) {
+			return _roadMap.get(id);
+		} else {
+			return null;
+		}
+	}
+
+	public Vehicle getVehicle(String id) {
+		if (_vehicleMap.containsKey(id)) {
+			return _vehicleMap.get(id);
+		} else {
+			return null;
+		}
+
+	}
+
+	public List<Junction> getJunctions() {
+		return _junctions;
+
+	}
+
+	public List<Road> getRoads() {
+		return _roads;
+
+	}
+
+	public List<Vehicle> getVehicles() {
+		return _vehicles;
+
+	}
+
+	public void reset() {
+		_juncMap.clear();
+		_junctions.clear();
+		_roadMap.clear();
+		_roads.clear();
+		_vehicleMap.clear();
+		_vehicles.clear();
+	}
+
+	public JSONObject report() {
+		JSONObject report = new JSONObject();
+
+		// Convertir junctions a JSON
+		JSONArray junctionsArray = new JSONArray();
+		for (Junction j : _junctions) {
+			junctionsArray.put(j.report());
+		}
+		report.put("junctions", junctionsArray);
+
+		// Convertir roads a JSON
+		JSONArray roadsArray = new JSONArray();
+		for (Road r : _roads) {
+			roadsArray.put(r.report());
+		}
+		report.put("roads", roadsArray);
+
+		// Convertir vehicles a JSON
+		JSONArray vehiclesArray = new JSONArray();
+		for (Vehicle v : _vehicles) {
+			vehiclesArray.put(v.report());
+		}
+		report.put("vehicles", vehiclesArray);
+
+		return report;
+
+	}
+
+}
