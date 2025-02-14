@@ -106,7 +106,7 @@ public abstract class Road extends SimulatedObject {
 	public JSONObject report() {
 		JSONObject j = new JSONObject();
 
-		j.put("id", getId().toString());
+		j.put("id", super.getId().toString());
 		j.put("speedLimit", _speedLimit);
 		j.put("weather", _weather.toString());
 		j.put("co2", _totalCont);
