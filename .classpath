@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Pr-tp2/src"/>
+	<classpathentry kind="src" path="Pr-tp2/tests"/>
+	<classpathentry kind="lib" path="Pr-tp2/lib/lib/commons-cli-1.4.jar"/>
+	<classpathentry kind="lib" path="Pr-tp2/lib/lib/json.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
