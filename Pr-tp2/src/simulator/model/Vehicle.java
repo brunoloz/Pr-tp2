@@ -19,7 +19,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 	private int _totalCO2;
 	private int _distance;
 	private int _contJunctions;
-	//PRIVATE BRUNO ES EL PUTISIMO AMO JODER
+	//Holaaa
 
 	protected Vehicle(String id, int maxSpeed, int contClass, List<Junction> itinerary)
 			throws IllegalArgumentException {
