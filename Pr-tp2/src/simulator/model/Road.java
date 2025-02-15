@@ -27,7 +27,7 @@ public abstract class Road extends SimulatedObject {
 		if (maxSpeed < 1) {
 			throw new IllegalArgumentException("MAXSPEED DEBE SER POSITIVO");
 		}
-		if (contLimit < 0) {
+		if (contLimit < 1) {
 			throw new IllegalArgumentException("CONTLIMIT DEBE SER POSITIVO");
 		}
 		if (length < 0) {
@@ -39,7 +39,7 @@ public abstract class Road extends SimulatedObject {
 		// TODO hacer bien
 		_srcJunc = srcJunc;
 		_destJunc = destJunc;
-		_srcJunc.addOutGoingRoad(this); // TODO ASI??
+		_srcJunc.addOutGoingRoad(this); // TODO ASI?? EN EL PDF PONE QUE HAY QUE LLAMAR A ESTOS METODOS
 		_destJunc.addIncommingRoad(this); // TODO ASI??
 
 		_maxSpeed = maxSpeed;
@@ -91,7 +91,7 @@ public abstract class Road extends SimulatedObject {
 		}
 
 		// Ordena la lista de vehículos por su localizacion
-		Collections.sort(_vehicles, new Comparator<Vehicle>() {
+		Collections.sort(_vehicles, new Comparator<Vehicle>() { //TODO ALGO MAL AQUI POR EL FALLO DE CITYROAD TEST1
 
 			@Override
 			public int compare(Vehicle v1, Vehicle v2) {
