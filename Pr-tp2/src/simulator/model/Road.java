@@ -30,7 +30,7 @@ public abstract class Road extends SimulatedObject {
 		if (contLimit < 1) {
 			throw new IllegalArgumentException("CONTLIMIT DEBE SER POSITIVO");
 		}
-		if (length < 0) {
+		if (length < 1) {
 			throw new IllegalArgumentException("LENGTH DEBE SER POSITIVO");
 		}
 		if (srcJunc == null || destJunc == null || weather == null) {
@@ -96,7 +96,7 @@ public abstract class Road extends SimulatedObject {
 			@Override
 			public int compare(Vehicle v1, Vehicle v2) {
 				// TODO Auto-generated method stub
-				return Integer.compare(v1.getLocation(), v2.getLocation());
+				return Integer.compare(v2.getLocation(), v1.getLocation());
 			}
 
 		});

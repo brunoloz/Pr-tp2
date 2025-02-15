@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="VehicleTest" project="Pr-tp2" tests="6" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="simulator.model.VehicleTest" incomplete="true" displayname="VehicleTest" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]">
+    <testcase name="test_1" classname="simulator.model.VehicleTest" incomplete="true" displayname="test_1()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:test_1()]"/>
+    <testcase name="test_report" classname="simulator.model.VehicleTest" incomplete="true" displayname="test_report()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:test_report()]"/>
+    <testcase name="getset_test_speed" classname="simulator.model.VehicleTest" incomplete="true" displayname="getset_test_speed()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:getset_test_speed()]"/>
+    <testcase name="error_handling" classname="simulator.model.VehicleTest" incomplete="true" displayname="error_handling()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:error_handling()]"/>
+    <testcase name="test_iterinary_is_readonly" classname="simulator.model.VehicleTest" incomplete="true" displayname="test_iterinary_is_readonly()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:test_iterinary_is_readonly()]"/>
+    <testcase name="getset_contamination_class" classname="simulator.model.VehicleTest" incomplete="true" displayname="getset_contamination_class()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.VehicleTest]/[method:getset_contamination_class()]"/>
+  </testsuite>
+</testrun>

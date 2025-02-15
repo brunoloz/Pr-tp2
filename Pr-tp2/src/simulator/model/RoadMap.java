@@ -1,6 +1,7 @@
 package simulator.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class RoadMap {
 	private Map<String, Road> _roadMap;
 	private Map<String, Vehicle> _vehicleMap;
 
-	RoadMap() {
+	protected RoadMap() {
 
 		this._junctions = new ArrayList<Junction>();
 		this._roads = new ArrayList<Road>();
@@ -44,7 +45,7 @@ public class RoadMap {
 			}
 		}
 
-		if (!_roadMap.containsKey(r.getSrc().getId()) || !_roadMap.containsKey(r.getDest().getId())) {
+		if (!_juncMap.containsKey(r.getSrc().getId()) || !_juncMap.containsKey(r.getDest().getId())) {
 			throw new IllegalArgumentException("No existe esta carretera en el mapa");
 		}
 
@@ -61,11 +62,18 @@ public class RoadMap {
 
 		List<Junction> itinerary = v.getItinerary();
 		int i;
-		for (i = 0; i < itinerary.size(); i++) {
-			if (v.getRoad().getSrc() == itinerary.get(i) && v.getRoad().getDest() != itinerary.get(i + 1)) {
-				throw new IllegalArgumentException("El itinerario de cruces no es válido");
+		boolean b = false;
+		for (i = 1; i < itinerary.size(); i++) {
+			for(Road r : _roads) {
+				if (r.getSrc().equals(itinerary.get(i-1)) && r.getDest().equals(itinerary.get(i)))
+					b = true;
 			}
 		}
+		if(!b)
+			throw new IllegalArgumentException("El itinerario de cruces no es válido");
+
+		_vehicles.add(v);
+		_vehicleMap.put(v.getId(), v);
 	}
 
 	public Junction getJunction(String id) {
@@ -94,17 +102,17 @@ public class RoadMap {
 	}
 
 	public List<Junction> getJunctions() {
-		return _junctions;
+		return Collections.unmodifiableList(_junctions);
 
 	}
 
 	public List<Road> getRoads() {
-		return _roads;
+		return Collections.unmodifiableList(_roads);
 
 	}
 
 	public List<Vehicle> getVehicles() {
-		return _vehicles;
+		return Collections.unmodifiableList(_vehicles);
 
 	}
 
