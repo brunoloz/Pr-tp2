@@ -2,15 +2,28 @@ package simulator.model;
 
 public class NewJunctionEvent extends Event {
 
-	public NewJunctionEvent(int time, String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy,
-			int xCoor, int yCoor) {
-		super(time);
-		// ...
-	}
+	
+	private String id;
+    private LightSwitchingStrategy lsStrategy;
+    private DequeuingStrategy dqStrategy;
+    private int xCoor;
+    private int yCoor;
 
-	@Override
-	void execute(RoadMap map) {
-		// TODO Auto-generated method stub
+    public NewJunctionEvent(int time, String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy, int xCoor, int yCoor) {
+        super(time);
+        this.id = id;
+        this.lsStrategy = lsStrategy;
+        this.dqStrategy = dqStrategy;
+        this.xCoor = xCoor;
+        this.yCoor = yCoor;
+    }
 
-	}
+    @Override
+    public void execute(RoadMap roadMap) {
+        // Crear el nuevo cruce
+        Junction newJunction = new Junction(id, lsStrategy, dqStrategy, xCoor, yCoor);
+        
+        // Añadir el cruce al mapa de carreteras
+        roadMap.addJunction(newJunction);
+    }
 }
