@@ -85,6 +85,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			int c = (_location - previousLocation) * _contClass;
 			_totalCO2 += c;
 			_currentRoad.addContamination(c);
+			_distance += (_location - previousLocation);
 
 			// (c)
 			if (_location >= _currentRoad.getLength()) {

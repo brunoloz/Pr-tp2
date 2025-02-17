@@ -150,7 +150,8 @@ class VehicleTest {
 		JSONObject jo = new JSONObject(s);
 
 		JSONObject report = v1.report();
-		assertTrue(jo.similar(report));	//TODO DISTANCIA DEBERIA SER 50 Y PONE 0, HAY Q CAMBIAR ALGO
+
+		assertTrue(jo.similar(report));	//TODO 
 	}
 
 	@Test

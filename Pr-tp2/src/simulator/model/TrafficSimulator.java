@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -11,10 +12,10 @@ public class TrafficSimulator {
 	private Queue<Event> _priorityQueue;
 	private int _time;
 
-	public TrafficSimulator(RoadMap _roadMap, Queue<Event> _priorityQueue, int _time) {
-		this._roadMap = _roadMap;
-		this._priorityQueue = _priorityQueue;
-		this._time = _time;
+	public TrafficSimulator() {
+		this._roadMap = new RoadMap();
+		this._priorityQueue = new LinkedList<Event>();
+		this._time = 0;
 	}
 
 	public void addEvent(Event e) {
@@ -22,6 +23,7 @@ public class TrafficSimulator {
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
+		
 	}
 
 	public void advance() {
@@ -54,8 +56,7 @@ public class TrafficSimulator {
 		
 		JSONObject j = new JSONObject();
 		j.put("time", _time);
-		JSONObject jo = _roadMap.report();
-		j.put("state", jo);
+		j.put("state", _roadMap.report());
 		
 		return j;
 

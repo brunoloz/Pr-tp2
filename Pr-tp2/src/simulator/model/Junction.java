@@ -37,6 +37,7 @@ public class Junction extends SimulatedObject {
 		if (yCoor < 0)
 			throw new IllegalArgumentException("yCoor no puede ser negativo.");
 
+		_greenLightIndex = -1; //inicialmente están todos en rojo
 		_lightStepChange = 0;
 		_enterRoads = new ArrayList<Road>();
 		_outRoadsMap = new HashMap<Junction, Road>();
