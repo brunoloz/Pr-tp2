@@ -2,6 +2,7 @@ package simulator.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import org.json.JSONObject;
@@ -14,7 +15,7 @@ public class TrafficSimulator {
 
 	public TrafficSimulator() {
 		this._roadMap = new RoadMap();
-		this._priorityQueue = new LinkedList<Event>();
+		this._priorityQueue = new PriorityQueue<Event>();
 		this._time = 0;
 	}
 
@@ -23,6 +24,8 @@ public class TrafficSimulator {
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
+		e.execute(_roadMap);
+		//_time++;
 		
 	}
 
