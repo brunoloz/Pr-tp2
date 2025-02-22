@@ -85,10 +85,10 @@ public class Junction extends SimulatedObject {
 			Road r = _enterRoads.get(_greenLightIndex);
 			List<Vehicle> q = r.getVehicles();
 			List<Vehicle> q_to_advance = _dqStrategy.dequeue(q);
-
+			
 			for (Vehicle v : q_to_advance) {
 				v.moveToNextRoad();
-				q_to_advance.remove(v);
+				q.remove(v);
 			}
 		}
 
@@ -106,7 +106,7 @@ public class Junction extends SimulatedObject {
 		if (_greenLightIndex == -1) {
 			j.put("green", "none");
 		} else {
-			j.put("green", _greenLightIndex);
+			j.put("green", _enterRoads.get(_greenLightIndex).getId());
 		}
 
 		JSONArray queuesArray = new JSONArray();

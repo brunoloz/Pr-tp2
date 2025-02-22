@@ -1,6 +1,6 @@
 package simulator.model;
 
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -24,18 +24,24 @@ public class TrafficSimulator {
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
-		e.execute(_roadMap);
+		//e.execute(_roadMap);
 		//_time++;
-		
 	}
 
 	public void advance() {
 		_time++;
-		for(Event e : _priorityQueue) {
+		Iterator<Event> i = _priorityQueue.iterator();
+		while(i.hasNext()){
+			Event e = i.next();
 			if(e.getTime() == _time) {
 				e.execute(_roadMap);
-				_priorityQueue.remove(e);
+				i.remove();
 			}
+		}
+		
+		List<Junction> junctions = _roadMap.getJunctions();
+		for(Junction j : junctions) {
+			j.advance(_time);
 		}
 		
 		List<Road> roads = _roadMap.getRoads();
@@ -43,10 +49,7 @@ public class TrafficSimulator {
 			r.advance(_time);
 		}
 		
-		List<Junction> junctions = _roadMap.getJunctions();
-		for(Junction j : junctions) {
-			j.advance(_time);
-		}
+
 	}
 
 	public void reset() {
