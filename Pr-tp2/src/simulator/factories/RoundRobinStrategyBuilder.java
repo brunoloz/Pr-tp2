@@ -7,8 +7,10 @@ import simulator.model.RoundRobinStrategy;
 
 public class RoundRobinStrategyBuilder extends Builder<LightSwitchingStrategy> {
 
-	public RoundRobinStrategyBuilder(String typeTag, String desc) {
-		super(typeTag, desc);
+
+
+	public RoundRobinStrategyBuilder() {
+		super("round_robin_lss", "");
 		// TODO Auto-generated constructor stub
 	}
 

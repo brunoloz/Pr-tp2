@@ -6,27 +6,21 @@ import simulator.model.Event;
 import simulator.model.NewInterCityRoadEvent;
 import simulator.model.Weather;
 
-public class NewInterCityRoadEventBuilder extends Builder<Event> {
+public class NewInterCityRoadEventBuilder extends NewRoadEventBuilder {
 
-	public NewInterCityRoadEventBuilder(String typeTag, String desc) {
-		super(typeTag, desc);
+	public NewInterCityRoadEventBuilder() {
+		super("new_inter_city_road", "");
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected Event create_instance(JSONObject data) {
+	protected Event create_event(int time, String id, String srcJunc, String destJunc, int length, int co2Limit,
+			int maxSpeed, Weather weather) {
 		// TODO Auto-generated method stub
-		int time = data.getJSONObject("data").getInt("time");
-		String id = data.getJSONObject("data").getString("id");
-		String srcJunc = data.getJSONObject("data").getString("src");
-		String destJunc = data.getJSONObject("data").getString("dest");
-		int length = data.getJSONObject("data").getInt("length");
-		int co2Limit = data.getJSONObject("data").getInt("co2limit");
-		int maxSpeed = data.getJSONObject("data").getInt("maxspeed");		
-		String sw = data.getJSONObject("data").getString("weather");
-		Weather weather = Weather.valueOf(sw);
 		return new NewInterCityRoadEvent(time, id, srcJunc, destJunc, length, co2Limit, maxSpeed, weather);
-
 	}
+
+
+	
 
 }
