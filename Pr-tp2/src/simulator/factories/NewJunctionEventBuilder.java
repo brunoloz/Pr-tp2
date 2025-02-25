@@ -1,5 +1,6 @@
 package simulator.factories;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.model.DequeuingStrategy;
@@ -12,7 +13,7 @@ public class NewJunctionEventBuilder extends Builder<Event> {
     private Factory<DequeuingStrategy> _dqsFactory;
 
 	public NewJunctionEventBuilder(Factory<LightSwitchingStrategy> lssFactory, Factory<DequeuingStrategy> dqsFactory) {
-		super("new_junction", "");
+		super("new_junction", "hola");
 		this._lssFactory = lssFactory;
 		this._dqsFactory = dqsFactory;
 		// TODO Auto-generated constructor stub
@@ -22,20 +23,19 @@ public class NewJunctionEventBuilder extends Builder<Event> {
 	protected Event create_instance(JSONObject data) {
 		// TODO Auto-generated method stub
         
-		int time = data.getJSONObject("data").getInt("time");
-		
-		String id = data.getJSONObject("data").getString("id");
-		
-        int x = data.getJSONObject("data").getJSONArray("coor").getInt(0);
-        int y = data.getJSONObject("data").getJSONArray("coor").getInt(1);
-        
-        JSONObject joLs = data.getJSONObject("data").getJSONObject("ls_strategy");
-        LightSwitchingStrategy lsStrategy = _lssFactory.create_instance(joLs); 
-        
-        JSONObject joDq = data.getJSONObject("data").getJSONObject("dq_strategy");
-        DequeuingStrategy dqStrategy = _dqsFactory.create_instance(joDq);
-        
-        return new NewJunctionEvent(time, id, lsStrategy, dqStrategy, x, y);
-	}
+	    int time = data.getInt("time");
+        String id = data.getString("id");
+
+        // Obtener coordenadas
+        JSONArray coorArray = data.getJSONArray("coor");
+        int xCoor = coorArray.getInt(0);
+        int yCoor = coorArray.getInt(1);
+
+        // Obtener estrategias usando las fábricas
+        LightSwitchingStrategy lsStrategy = _lssFactory.create_instance(data.getJSONObject("ls_strategy"));
+        DequeuingStrategy dqStrategy = _dqsFactory.create_instance(data.getJSONObject("dq_strategy"));
+
+        return new NewJunctionEvent(time, id, lsStrategy, dqStrategy, xCoor, yCoor);
+    }
 
 }

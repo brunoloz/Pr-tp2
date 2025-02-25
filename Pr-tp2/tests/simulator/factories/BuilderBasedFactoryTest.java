@@ -42,6 +42,7 @@ class BuilderBasedFactoryTest {
 
 		List<Builder<Event>> eventBuilders = new ArrayList<>();
 
+		
 		eventBuilders.add(new NewJunctionEventBuilder(createLSSFactory(), createDQSFactory()));
 		eventBuilders.add(new NewCityRoadEventBuilder());
 		eventBuilders.add(new NewInterCityRoadEventBuilder());

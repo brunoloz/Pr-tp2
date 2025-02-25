@@ -37,6 +37,7 @@ class NewCityRoadEventBuilderTest {
 				+ "      	 \"ls_strategy\" : { \"type\" : \"round_robin_lss\", \"data\" : {\"timeslot\" : 5} },\n"
 				+ "      	 \"dq_strategy\" : { \"type\" : \"move_first_dqs\",  \"data\" : {} }\n" + "   	 }";
 
+		//NewJunctionEventBuilder jeb = new NewJunctionEventBuilder(lssFactory, dqsFactory);
 		NewJunctionEventBuilder jeb = new NewJunctionEventBuilder(lssFactory, dqsFactory);
 		ts.addEvent(jeb.create_instance(new JSONObject(dataJson1)));
 		ts.addEvent(jeb.create_instance(new JSONObject(dataJson2)));
