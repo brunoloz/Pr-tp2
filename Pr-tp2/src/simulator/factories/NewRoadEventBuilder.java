@@ -16,14 +16,14 @@ public abstract class  NewRoadEventBuilder extends Builder<Event>{
 	protected Event create_instance(JSONObject data) {
 		// TODO Auto-generated method stub
 		
-		int time = data.getJSONObject("data").getInt("time");
-		String id = data.getJSONObject("data").getString("id");
-		String srcJunc = data.getJSONObject("data").getString("src");
-		String destJunc = data.getJSONObject("data").getString("dest");
-		int length = data.getJSONObject("data").getInt("length");
-		int co2Limit = data.getJSONObject("data").getInt("co2limit");
-		int maxSpeed = data.getJSONObject("data").getInt("maxspeed");		
-		String sw = data.getJSONObject("data").getString("weather");
+		int time = data.getInt("time");
+		String id = data.getString("id");
+		String srcJunc = data.getString("src");
+		String destJunc = data.getString("dest");
+		int length = data.getInt("length");
+		int co2Limit = data.getInt("co2limit");
+		int maxSpeed = data.getInt("maxspeed");		
+		String sw = data.getString("weather");
 		Weather weather = Weather.valueOf(sw);
 		return create_event(time, id, srcJunc, destJunc, 
 				length, co2Limit, maxSpeed, weather);
