@@ -1,6 +1,8 @@
 package simulator.launcher;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -9,7 +11,10 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import simulator.factories.BuilderBasedFactory;
 import simulator.factories.Factory;
+import simulator.factories.NewCityRoadEventBuilder;
+import simulator.factories.NewJunctionEventBuilder;
 import simulator.model.Event;
 
 public class Main {
@@ -82,6 +87,7 @@ public class Main {
 	}
 
 	private static void initFactories() {
+		
 	}
 
 	private static void startBatchMode() throws IOException {
