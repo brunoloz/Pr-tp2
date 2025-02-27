@@ -2,8 +2,11 @@ package simulator.launcher;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.jupiter.api.Test;
@@ -20,6 +23,22 @@ class MainTest {
 
 			JSONObject jo1 = new JSONObject(new JSONTokener(new FileInputStream(currRunOutFile)));
 			JSONObject jo2 = new JSONObject(new JSONTokener(new FileInputStream(expectedOutFile)));
+			
+			try (BufferedReader reader1 = new BufferedReader(new FileReader(outFile));
+	                 BufferedReader reader2 = new BufferedReader(new FileReader(expOutFile))) {
+
+	                    String line1, line2;
+	                    int lineNum = 1;
+
+	                    while ((line1 = reader1.readLine()) != null & (line2 = reader2.readLine()) != null) {
+	                        if (!line1.equals(line2)) {
+	                            System.out.println("Diferencia en la línea " + lineNum + ":");
+	                            System.out.println("Archivo 1: " + line1);
+	                            System.out.println("Archivo 2: " + line2);
+	                        }
+	                        lineNum++;
+	                    }
+	            }
 
 			// currRunOutFile.delete();
 
@@ -31,22 +50,22 @@ class MainTest {
 
 	@Test
 	void test_1() {
-		assertTrue(run("resources/examples/ex1.json", "resources/tmp/ex1.junit.out.json",
-				"resources/examples/ex1.expout.json", 300));
+		assertTrue(run("resources/resources/examples/ex1.json", "resources/resources/tmp/ex1.junit.out.json",
+				"resources/resources/examples/ex1.expout.json", 300));
 
 	}
 
 	@Test
 	void test_2() {
-		assertTrue(run("resources/examples/ex2.json", "resources/tmp/ex2.junit.out.json",
-				"resources/examples/ex2.expout.json", 300));
+		assertTrue(run("resources/resources/examples/ex2.json", "resources/resources/tmp/ex2.junit.out.json",
+				"resources/resources/examples/ex2.expout.json", 300));
 
 	}
 
 	@Test
 	void test_3() {
-		assertTrue(run("resources/examples/ex3.json", "resources/tmp/ex3.junit.out.json",
-				"resources/examples/ex3.expout.json", 150));
+		assertTrue(run("resources/resources/examples/ex3.json", "resources/resources/tmp/ex3.junit.out.json",
+				"resources/resources/examples/ex3.expout.json", 150));
 
 	}
 

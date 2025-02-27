@@ -57,6 +57,7 @@ public class Controller {
         for (int i = 0; i < n; i++) {
         	_trafficSimulator.advance();
             states.put(_trafficSimulator.report());
+            
         }
         
         result.put("states", states);

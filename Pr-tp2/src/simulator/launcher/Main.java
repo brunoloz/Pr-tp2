@@ -1,6 +1,10 @@
 package simulator.launcher;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +16,24 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import simulator.control.Controller;
 import simulator.factories.Builder;
 import simulator.factories.BuilderBasedFactory;
 import simulator.factories.Factory;
 import simulator.factories.NewCityRoadEventBuilder;
+import simulator.factories.RoundRobinStrategyBuilder;
 import simulator.factories.NewJunctionEventBuilder;
+import simulator.factories.MostCrowdedStrategyBuilder;
+import simulator.factories.MoveAllStrategyBuilder;
+import simulator.factories.MoveFirstStrategyBuilder;
+import simulator.factories.NewInterCityRoadEventBuilder;
+import simulator.factories.NewVehicleEventBuilder;
+import simulator.factories.SetContClassEventBuilder;
+import simulator.factories.SetWeatherEventBuilder;
 import simulator.model.DequeuingStrategy;
 import simulator.model.Event;
 import simulator.model.LightSwitchingStrategy;
+import simulator.model.TrafficSimulator;
 
 public class Main {
 
@@ -104,7 +118,7 @@ public class Main {
 	}
 
 	private static void initFactories() {
-		List<Builder<LightSwitchingStrategy>> lsbs = new ArrayList<>();
+		ArrayList<Builder<LightSwitchingStrategy>> lsbs = new ArrayList<>();
 		lsbs.add( new RoundRobinStrategyBuilder() );
 		lsbs.add( new MostCrowdedStrategyBuilder() );
 		Factory<LightSwitchingStrategy> lssFactory = new BuilderBasedFactory<>(lsbs);
@@ -128,6 +142,37 @@ public class Main {
 	}
 
 	private static void startBatchMode() throws IOException {
+		try {
+	        // Crear InputStream desde _inFile
+	        InputStream in = new FileInputStream(_inFile);
+	        
+	        // Crear OutputStream desde _outFile, o usar System.out si es null
+	        OutputStream out = (_outFile != null) ? new FileOutputStream(_outFile) : System.out;
+	        
+	        // Crear TrafficSimulator
+	        TrafficSimulator sim = new TrafficSimulator();
+	        
+	        // Crear Controller con TrafficSimulator y la events factory
+	        Controller controller = new Controller(sim, _eventsFactory);
+	        
+	        // Cargar eventos desde el InputStream
+	        controller.loadEvents(in);
+	        
+	        // Cerrar el InputStream
+	        in.close();
+	        
+	        // Ejecutar la simulación con _timeLimit pasos y guardar los resultados en el OutputStream
+	        controller.run(_timeLimit, out);
+
+	        // Si el OutputStream no es System.out, cerrarlo
+	        if (_outFile != null) {
+	            out.close();
+	        }
+	    } catch (IOException e) {
+	        System.err.println("Error de lectura/escritura: " + e.getMessage());
+	    } catch (Exception e) {
+	        System.err.println("Error en la simulación: " + e.getMessage());
+	    }
 	}
 
 	private static void start(String[] args) throws IOException {
