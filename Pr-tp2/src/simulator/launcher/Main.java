@@ -2,6 +2,7 @@ package simulator.launcher;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -11,17 +12,21 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import simulator.factories.Builder;
 import simulator.factories.BuilderBasedFactory;
 import simulator.factories.Factory;
 import simulator.factories.NewCityRoadEventBuilder;
 import simulator.factories.NewJunctionEventBuilder;
+import simulator.model.DequeuingStrategy;
 import simulator.model.Event;
+import simulator.model.LightSwitchingStrategy;
 
 public class Main {
 
 	private static String _inFile = null;
 	private static String _outFile = null;
 	private static Factory<Event> _eventsFactory = null;
+	private static int _timeLimit = 0;
 
 	private static void parseArgs(String[] args) {
 
@@ -37,6 +42,7 @@ public class Main {
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
 			parseOutFileOption(line);
+			parseTicksFileOption(line);
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -63,7 +69,7 @@ public class Main {
 		cmdLineOptions.addOption(
 				Option.builder("o").longOpt("output").hasArg().desc("Output file, where reports are written.").build());
 		cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message").build());
-
+		cmdLineOptions.addOption(Option.builder("t").longOpt("ticks").hasArg().desc("Ticks to the simulator's main loop (default value is 10)").build());
 		return cmdLineOptions;
 	}
 
@@ -85,8 +91,39 @@ public class Main {
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
 		_outFile = line.getOptionValue("o");
 	}
+	
+	private static void parseTicksFileOption(CommandLine line){
+		String s = line.getOptionValue("t");
+		int t = Integer.parseInt(s);
+		if(t == 0) {
+			_timeLimit = 10;
+		}
+		else {
+			_timeLimit = t;
+		}
+	}
 
 	private static void initFactories() {
+		List<Builder<LightSwitchingStrategy>> lsbs = new ArrayList<>();
+		lsbs.add( new RoundRobinStrategyBuilder() );
+		lsbs.add( new MostCrowdedStrategyBuilder() );
+		Factory<LightSwitchingStrategy> lssFactory = new BuilderBasedFactory<>(lsbs);
+		
+		List<Builder<DequeuingStrategy>> dqbs = new ArrayList<>();
+		dqbs.add( new MoveAllStrategyBuilder() );
+		dqbs.add( new MoveFirstStrategyBuilder() );
+		Factory<DequeuingStrategy> dqsFactory = new BuilderBasedFactory<>(dqbs);
+		
+		// initialize the events factory
+		List<Builder<Event>> ebs = new ArrayList<>();
+		ebs.add( new NewJunctionEventBuilder(lssFactory,dqsFactory) );
+		ebs.add( new NewCityRoadEventBuilder() );
+		ebs.add( new NewInterCityRoadEventBuilder() );
+		ebs.add( new NewVehicleEventBuilder() );
+		ebs.add( new SetContClassEventBuilder());
+		ebs.add( new SetWeatherEventBuilder());
+		// ...
+		_eventsFactory = new BuilderBasedFactory<>(ebs);
 		
 	}
 
