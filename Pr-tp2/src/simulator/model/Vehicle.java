@@ -89,10 +89,13 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 
 			// (c)
 			if (_location >= _currentRoad.getLength()) {
-				_currentRoad.getSrc().enter(this);
+				//_currentRoad.getSrc().enter(this);
+				
 				_state = VehicleStatus.WAITING;
 				_currentSpeed = 0;
+				_location = 0;
 				_contJunctions++;
+				_currentRoad.getDest().enter(this);
 
 			}
 

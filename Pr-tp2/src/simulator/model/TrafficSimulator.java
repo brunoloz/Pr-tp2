@@ -39,15 +39,17 @@ public class TrafficSimulator {
 			}
 		}
 		
+		List<Road> roads = _roadMap.getRoads();
+		for(Road r : roads) {
+			r.advance(_time);
+		}
+		
 		List<Junction> junctions = _roadMap.getJunctions();
 		for(Junction j : junctions) {
 			j.advance(_time);
 		}
 		
-		List<Road> roads = _roadMap.getRoads();
-		for(Road r : roads) {
-			r.advance(_time);
-		}
+		
 		
 
 	}

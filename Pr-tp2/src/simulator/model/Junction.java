@@ -72,7 +72,8 @@ public class Junction extends SimulatedObject {
 
 	public void enter(Vehicle v) {
 		Road r = v.getRoad();
-		r.getVehicles().add(v);
+		//r.getVehicles().add(v);
+		r.enter(v);
 	}
 
 	public Road roadTo(Junction j) {
