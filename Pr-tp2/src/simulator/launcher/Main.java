@@ -159,7 +159,9 @@ public class Main {
 	        controller.loadEvents(in);
 	        
 	        // Cerrar el InputStream
-	        in.close();
+	        if(_inFile != null) {
+		        in.close();
+	        }
 	        
 	        // Ejecutar la simulación con _timeLimit pasos y guardar los resultados en el OutputStream
 	        controller.run(_timeLimit, out);

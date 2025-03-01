@@ -2,6 +2,7 @@ package simulator.control;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 
 import org.json.JSONArray;
@@ -51,20 +52,25 @@ public class Controller {
             throw new IllegalArgumentException("Invalid number of ticks or output stream is null");
         }
         
-        JSONObject result = new JSONObject();
-        JSONArray states = new JSONArray();
-        
-        for (int i = 0; i < n; i++) {
-        	_trafficSimulator.advance();
-            states.put(_trafficSimulator.report());
-            
-        }
-        
-        result.put("states", states);
-        
-        try (PrintWriter writer = new PrintWriter(out)) {
-            writer.print(result.toString());
-        }
+		PrintStream p = new PrintStream(out);
+		// print "{" to 'p'
+		// print "  \"states\": [" to 'p'
+
+		// loop for the first n-1 states (to print comma after each state)
+		for (int i = 0; i < n - 1; i++) {
+		    _trafficSimulator.advance();
+		    p.print(_trafficSimulator.report());
+		    p.println(",");
+		}
+
+		// last step, only if 'n > 0'
+		if (n > 0) {
+		    _trafficSimulator.advance();
+		    p.print(_trafficSimulator.report());
+		}
+
+		// print "]" to 'p'
+		// print "}" to 'p'
 	}
 
 	public void reset() {
