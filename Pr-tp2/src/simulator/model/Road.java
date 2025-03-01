@@ -86,17 +86,18 @@ public abstract class Road extends SimulatedObject {
 		reduceTotalContamination();
 		updateSpeedLimit();
 		
-//		for (Vehicle v : _vehicles) {
-//			v.setSpeed(calculateVehicleSpeed(v));
-//			v.advance(currTime);
-//
-//		}
-		Iterator<Vehicle> iterator = _vehicles.iterator();
-		while (iterator.hasNext()) {
-		    Vehicle v = iterator.next();
-		    v.setSpeed(calculateVehicleSpeed(v));
-		    v.advance(currTime);
+		List<Vehicle> copy = new ArrayList<>(_vehicles);
+		for (Vehicle v : copy) {
+			v.setSpeed(calculateVehicleSpeed(v));
+			v.advance(currTime);
+
 		}
+//		Iterator<Vehicle> iterator = _vehicles.iterator();
+//		while (iterator.hasNext()) {
+//		    Vehicle v = iterator.next();
+//		    v.setSpeed(calculateVehicleSpeed(v));
+//		    v.advance(currTime);
+//		}
 
 		// Ordena la lista de vehículos por su localizacion
 		Collections.sort(_vehicles, new Comparator<Vehicle>() { //TODO ALGO MAL AQUI POR EL FALLO DE CITYROAD TEST1

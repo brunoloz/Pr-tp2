@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -38,12 +39,12 @@ public class TrafficSimulator {
 			}
 		}
 		
-		List<Junction> junctions = _roadMap.getJunctions();
+		List<Junction> junctions = new ArrayList<>(_roadMap.getJunctions());
 		for(Junction j : junctions) {
 			j.advance(_time);
 		}
 		
-		List<Road> roads = _roadMap.getRoads();
+		List<Road> roads = new ArrayList<>(_roadMap.getRoads());
 		for(Road r : roads) {
 			r.advance(_time);
 		}

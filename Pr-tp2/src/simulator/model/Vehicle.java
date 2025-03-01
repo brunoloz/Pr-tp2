@@ -124,6 +124,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 					_currentRoad = null;
 					_currentSpeed = 0;
 				} else {
+					
 					Junction j = _itinerary.get(_contJunctions);
 					Junction j1 = _itinerary.get(_contJunctions + 1);
 					_currentRoad = j.roadTo(j1);

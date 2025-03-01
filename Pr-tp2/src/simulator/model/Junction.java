@@ -84,8 +84,10 @@ public class Junction extends SimulatedObject {
 
 		if (_greenLightIndex != -1) {
 			Road r = _enterRoads.get(_greenLightIndex);
-			List<Vehicle> q = r.getVehicles();
-			List<Vehicle> q_to_advance = _dqStrategy.dequeue(q);
+			List<Vehicle> q = new ArrayList<>(r.getVehicles());
+			List<Vehicle> q_to_advance = new ArrayList<>(_dqStrategy.dequeue(q));
+			
+			
 			
 			for (Vehicle v : q_to_advance) {
 				v.moveToNextRoad();
