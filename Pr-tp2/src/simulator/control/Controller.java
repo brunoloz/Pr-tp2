@@ -55,6 +55,9 @@ public class Controller {
 		PrintStream p = new PrintStream(out);
 		// print "{" to 'p'
 		// print "  \"states\": [" to 'p'
+		
+	    p.println("{");
+	    p.println("  \"states\": [");
 
 		// loop for the first n-1 states (to print comma after each state)
 		for (int i = 0; i < n - 1; i++) {
@@ -71,6 +74,8 @@ public class Controller {
 
 		// print "]" to 'p'
 		// print "}" to 'p'
+	    p.println("]");
+	    p.println("}");
 	}
 
 	public void reset() {

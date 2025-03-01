@@ -3,6 +3,7 @@ package simulator.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -84,10 +85,17 @@ public abstract class Road extends SimulatedObject {
 	public void advance(int currTime) {
 		reduceTotalContamination();
 		updateSpeedLimit();
-		for (Vehicle v : _vehicles) {
-			v.setSpeed(calculateVehicleSpeed(v));
-			v.advance(currTime);
-
+		
+//		for (Vehicle v : _vehicles) {
+//			v.setSpeed(calculateVehicleSpeed(v));
+//			v.advance(currTime);
+//
+//		}
+		Iterator<Vehicle> iterator = _vehicles.iterator();
+		while (iterator.hasNext()) {
+		    Vehicle v = iterator.next();
+		    v.setSpeed(calculateVehicleSpeed(v));
+		    v.advance(currTime);
 		}
 
 		// Ordena la lista de vehículos por su localizacion
