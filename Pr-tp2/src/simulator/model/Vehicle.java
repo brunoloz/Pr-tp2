@@ -24,7 +24,6 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 	protected Vehicle(String id, int maxSpeed, int contClass, List<Junction> itinerary)
 			throws IllegalArgumentException {
 		super(id);
-		// TODO complete
 
 		if (maxSpeed < 1) {
 			throw new IllegalArgumentException("NO SE PUEDE CREAR UN VEHICULO CON UNA MAXSPEED NEGATIVA");
@@ -43,12 +42,12 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 		_itinerary = Collections.unmodifiableList(new ArrayList<>(itinerary));
 		_currentRoad = null;
 		_contJunctions = 0;
-		_state = VehicleStatus.PENDING; // ?
+		_state = VehicleStatus.PENDING; 
 
 	}
 
-	void setSpeed(int s) throws IllegalArgumentException { // USAR ESTOS SETTERS EN EL CONSTRUCTOR Y PONERLOS COMO
-															// PRIVADOS??
+	void setSpeed(int s) throws IllegalArgumentException { 
+		
 		if (s < 0)
 			throw new IllegalArgumentException("NO SE PUEDE SETTEAR LA SPEED CON UN VALOR NEGATIVO");
 
@@ -87,13 +86,10 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 
 			// (c)
 			if (_location >= _currentRoad.getLength()) {
-				//_currentRoad.getSrc().enter(this);
-				
 
 				_currentRoad.getDest().enter(this);
 				_state = VehicleStatus.WAITING;
 				_currentSpeed = 0;
-//				_location = 0;
 				_contJunctions++;
 			}
 
@@ -197,7 +193,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 	}
 
 	@Override
-	public int compareTo(Vehicle o) { // TODO para ordenar la lista de vehiculos en Road
+	public int compareTo(Vehicle o) { 
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -48,8 +48,6 @@ public class Junction extends SimulatedObject {
 
 	}
 
-	// Duda con cuales tienen que ser los modificadores de visibilidad
-
 	public void addIncommingRoad(Road r) throws IllegalArgumentException {
 
 		if (r.getDest().equals(this)) {
@@ -64,7 +62,7 @@ public class Junction extends SimulatedObject {
 	}
 
 	public void addOutGoingRoad(Road r) throws IllegalArgumentException {
-		if (r.getSrc().equals(this) /* && this.roadTo(r.getDest())== null */)
+		if (r.getSrc().equals(this))
 			_outRoadsMap.put(r.getDest(), r);
 		else
 			throw new IllegalArgumentException("La carretera no es saliente al cruce actual.");
@@ -74,8 +72,6 @@ public class Junction extends SimulatedObject {
 		Road r = v.getRoad();
 		List<Vehicle> q = new ArrayList<>(r.getVehicles());
 		_queueByRoad.put(r, q);
-		//q.add(v);
-		//r.enter(v);
 	}
 
 	public Road roadTo(Junction j) {
@@ -89,8 +85,6 @@ public class Junction extends SimulatedObject {
 			Road r = _enterRoads.get(_greenLightIndex);
 			List<Vehicle> q = new ArrayList<>(r.getVehicles());
 			List<Vehicle> q_to_advance = new ArrayList<>(_dqStrategy.dequeue(q));
-//			List<Vehicle> q = r.getVehicles();
-//			List<Vehicle> q_to_advance = _dqStrategy.dequeue(q);
 						
 			for (Vehicle v : q_to_advance) {
 				
@@ -103,7 +97,7 @@ public class Junction extends SimulatedObject {
 		int i = _lsStrategy.chooseNextGreen(_enterRoads, _queue, _greenLightIndex, _lightStepChange, currTime);
 		if (i != _greenLightIndex) {
 			_greenLightIndex = i;
-			_lightStepChange = currTime; // duda (no sé si se hace así)
+			_lightStepChange = currTime; 
 			
 		}
 	}
@@ -127,7 +121,9 @@ public class Junction extends SimulatedObject {
 			JSONArray vehiclesArray = new JSONArray();
 			if (_queueByRoad.get(road) != null) {
 				for (Vehicle v : _queueByRoad.get(road)) {
+					if(v.getStatus()!= VehicleStatus.TRAVELING) {
 					vehiclesArray.put(v.getId());
+					}
 				}
 			}
 			queue.put("vehicles", vehiclesArray);

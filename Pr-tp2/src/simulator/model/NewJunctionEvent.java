@@ -20,10 +20,7 @@ public class NewJunctionEvent extends Event {
 
     @Override
     public void execute(RoadMap roadMap) {
-        // Crear el nuevo cruce
         Junction newJunction = new Junction(id, lsStrategy, dqStrategy, xCoor, yCoor);
-        
-        // Añadir el cruce al mapa de carreteras
         roadMap.addJunction(newJunction);
     }
 }

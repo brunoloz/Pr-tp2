@@ -8,7 +8,7 @@ public class MoveAllStrategy implements DequeuingStrategy {
 	@Override
 	public List<Vehicle> dequeue(List<Vehicle> q) {
 
-		return Collections.unmodifiableList(q); // TODO ASI??
+		return Collections.unmodifiableList(q); // TODO 
 	}
 
 }

@@ -143,30 +143,20 @@ public class Main {
 
 	private static void startBatchMode() throws IOException {
 		try {
-	        // Crear InputStream desde _inFile
 	        InputStream in = new FileInputStream(_inFile);
 	        
-	        // Crear OutputStream desde _outFile, o usar System.out si es null
 	        OutputStream out = (_outFile != null) ? new FileOutputStream(_outFile) : System.out;
 	        
-	        // Crear TrafficSimulator
 	        TrafficSimulator sim = new TrafficSimulator();
 	        
-	        // Crear Controller con TrafficSimulator y la events factory
 	        Controller controller = new Controller(sim, _eventsFactory);
 	        
-	        // Cargar eventos desde el InputStream
 	        controller.loadEvents(in);
+	        	       
+		    in.close();
 	        
-	        // Cerrar el InputStream
-	        if(_inFile != null) {
-		        in.close();
-	        }
-	        
-	        // Ejecutar la simulación con _timeLimit pasos y guardar los resultados en el OutputStream
 	        controller.run(_timeLimit, out);
 
-	        // Si el OutputStream no es System.out, cerrarlo
 	        if (_outFile != null) {
 	            out.close();
 	        }
