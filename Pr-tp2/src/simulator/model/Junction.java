@@ -54,7 +54,7 @@ public class Junction extends SimulatedObject {
 
 		if (r.getDest().equals(this)) {
 			_enterRoads.add(r);
-			List<Vehicle> queue = new LinkedList<>();
+			List<Vehicle> queue = new ArrayList<Vehicle>();
 			_queue.add(queue);
 			_queueByRoad.put(r, queue);
 		} else {
@@ -73,7 +73,8 @@ public class Junction extends SimulatedObject {
 	public void enter(Vehicle v) {
 		Road r = v.getRoad();
 		List<Vehicle> q = new ArrayList<>(r.getVehicles());
-		q.add(v);
+		_queueByRoad.put(r, q);
+		//q.add(v);
 		//r.enter(v);
 	}
 
@@ -92,8 +93,10 @@ public class Junction extends SimulatedObject {
 //			List<Vehicle> q_to_advance = _dqStrategy.dequeue(q);
 						
 			for (Vehicle v : q_to_advance) {
+				
 				v.moveToNextRoad();
 				q.remove(v);
+				_queueByRoad.put(r, q);
 			}
 		}
 
@@ -122,9 +125,8 @@ public class Junction extends SimulatedObject {
 
 			// Obtener la lista de vehículos en la cola
 			JSONArray vehiclesArray = new JSONArray();
-			List<Vehicle> vehiclesInQueue = _queueByRoad.get(road);
-			if (vehiclesInQueue != null) {
-				for (Vehicle v : vehiclesInQueue) {
+			if (_queueByRoad.get(road) != null) {
+				for (Vehicle v : _queueByRoad.get(road)) {
 					vehiclesArray.put(v.getId());
 				}
 			}

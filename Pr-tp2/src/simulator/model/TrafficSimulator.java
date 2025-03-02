@@ -30,14 +30,19 @@ public class TrafficSimulator {
 
 	public void advance() {
 		_time++;
-		Iterator<Event> i = _priorityQueue.iterator();
-		while(i.hasNext()){
-			Event e = i.next();
-			if(e.getTime() == _time) {
-				e.execute(_roadMap);
-				i.remove();
-			}
-		}
+//		Iterator<Event> i = _priorityQueue.iterator();
+//		while(i.hasNext()){
+//			Event e = i.next();
+//			if(e.getTime() == _time) {
+//				e.execute(_roadMap);
+//				i.remove();
+//			}
+//		}
+		
+	    while (!_priorityQueue.isEmpty() && _priorityQueue.peek().getTime() == _time) {
+	        Event e = _priorityQueue.poll(); // Elimina el evento de la cola
+	        e.execute(_roadMap);  // Ejecuta el evento
+	    }
 		
 		List<Junction> junctions = new ArrayList<>(_roadMap.getJunctions());
 		for(Junction j : junctions) {

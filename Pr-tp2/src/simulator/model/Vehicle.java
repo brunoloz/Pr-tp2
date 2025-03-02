@@ -89,12 +89,12 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			if (_location >= _currentRoad.getLength()) {
 				//_currentRoad.getSrc().enter(this);
 				
+
+				_currentRoad.getDest().enter(this);
 				_state = VehicleStatus.WAITING;
 				_currentSpeed = 0;
 //				_location = 0;
 				_contJunctions++;
-				_currentRoad.getDest().enter(this);
-
 			}
 
 		}
@@ -113,7 +113,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			_state = VehicleStatus.TRAVELING;
 
 		} else {
-			if (_currentRoad != null && _state == VehicleStatus.WAITING) { // Si está en una carretera
+			if (_currentRoad != null || _contJunctions > 0) { // Si está en una carretera
 				_location = 0;
 				_currentRoad.exit(this);
 				
@@ -131,6 +131,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 					_currentRoad = j.roadTo(j1);
 					_currentRoad.enter(this);
 					_state = VehicleStatus.TRAVELING;
+					_location = 0;
 					
 
 				}

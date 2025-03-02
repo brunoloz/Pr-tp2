@@ -48,19 +48,19 @@ class MainTest {
 		}
 	}
 
-//	@Test
-//	void test_1() {	//cambiamos la ruta poniendo otro resources porque sino el archivo no lo leía
-//		assertTrue(run("resources/resources/examples/ex1.json", "resources/resources/tmp/ex1.junit.out.json",
-//				"resources/resources/examples/ex1.expout.json", 300));
-//
-//	}
-//
-//	@Test
-//	void test_2() {
-//		assertTrue(run("resources/resources/examples/ex2.json", "resources/resources/tmp/ex2.junit.out.json",
-//				"resources/resources/examples/ex2.expout.json", 300));
-//
-//	}
+	@Test
+	void test_1() {	//cambiamos la ruta poniendo otro resources porque sino el archivo no lo leía
+		assertTrue(run("resources/resources/examples/ex1.json", "resources/resources/tmp/ex1.junit.out.json",
+				"resources/resources/examples/ex1.expout.json", 300));
+
+	}
+
+	@Test
+	void test_2() {
+		assertTrue(run("resources/resources/examples/ex2.json", "resources/resources/tmp/ex2.junit.out.json",
+				"resources/resources/examples/ex2.expout.json", 300));
+
+	}
 
 	@Test
 	void test_3() {
