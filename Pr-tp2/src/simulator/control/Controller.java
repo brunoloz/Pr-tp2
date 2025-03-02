@@ -74,6 +74,7 @@ public class Controller {
 
 		// print "]" to 'p'
 		// print "}" to 'p'
+		p.println();
 	    p.println("]");
 	    p.println("}");
 	}

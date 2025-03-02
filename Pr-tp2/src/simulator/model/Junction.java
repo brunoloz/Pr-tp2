@@ -72,8 +72,9 @@ public class Junction extends SimulatedObject {
 
 	public void enter(Vehicle v) {
 		Road r = v.getRoad();
-		//r.getVehicles().add(v);
-		r.enter(v);
+		List<Vehicle> q = new ArrayList<>(r.getVehicles());
+		q.add(v);
+		//r.enter(v);
 	}
 
 	public Road roadTo(Junction j) {
@@ -82,13 +83,14 @@ public class Junction extends SimulatedObject {
 
 	public void advance(int currTime) {
 
+
 		if (_greenLightIndex != -1) {
 			Road r = _enterRoads.get(_greenLightIndex);
 			List<Vehicle> q = new ArrayList<>(r.getVehicles());
 			List<Vehicle> q_to_advance = new ArrayList<>(_dqStrategy.dequeue(q));
-			
-			
-			
+//			List<Vehicle> q = r.getVehicles();
+//			List<Vehicle> q_to_advance = _dqStrategy.dequeue(q);
+						
 			for (Vehicle v : q_to_advance) {
 				v.moveToNextRoad();
 				q.remove(v);
@@ -98,7 +100,8 @@ public class Junction extends SimulatedObject {
 		int i = _lsStrategy.chooseNextGreen(_enterRoads, _queue, _greenLightIndex, _lightStepChange, currTime);
 		if (i != _greenLightIndex) {
 			_greenLightIndex = i;
-			_lightStepChange++; // duda (no sé si se hace así)
+			_lightStepChange = currTime; // duda (no sé si se hace así)
+			
 		}
 	}
 

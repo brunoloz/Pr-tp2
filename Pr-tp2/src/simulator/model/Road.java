@@ -55,7 +55,7 @@ public abstract class Road extends SimulatedObject {
 		if (v.getLocation() != 0 || v.getSpeed() != 0) {
 			throw new IllegalArgumentException("NO SE PUEDE AÑADIR EL VEHICULO A LA CARRETERA");
 		}
-		_vehicles.addLast(v);
+			_vehicles.addLast(v);			
 	}
 
 	public void exit(Vehicle v) {
@@ -86,12 +86,13 @@ public abstract class Road extends SimulatedObject {
 		reduceTotalContamination();
 		updateSpeedLimit();
 		
-		List<Vehicle> copy = new ArrayList<>(_vehicles);
-		for (Vehicle v : copy) {
+//		List<Vehicle> copy = new ArrayList<>(_vehicles);
+		for (Vehicle v : _vehicles) {
 			v.setSpeed(calculateVehicleSpeed(v));
 			v.advance(currTime);
 
 		}
+
 //		Iterator<Vehicle> iterator = _vehicles.iterator();
 //		while (iterator.hasNext()) {
 //		    Vehicle v = iterator.next();

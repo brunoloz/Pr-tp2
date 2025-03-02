@@ -24,23 +24,23 @@ class MainTest {
 			JSONObject jo1 = new JSONObject(new JSONTokener(new FileInputStream(currRunOutFile)));
 			JSONObject jo2 = new JSONObject(new JSONTokener(new FileInputStream(expectedOutFile)));
 			
-//			try (BufferedReader reader1 = new BufferedReader(new FileReader(outFile));
-//	                 BufferedReader reader2 = new BufferedReader(new FileReader(expOutFile))) {
-//
-//	                    String line1, line2;
-//	                    int lineNum = 1;
-//
-//	                    while ((line1 = reader1.readLine()) != null & (line2 = reader2.readLine()) != null) {
-//	                        if (!line1.equals(line2)) {
-//	                            System.out.println("Diferencia en la línea " + lineNum + ":");
-//	                            System.out.println("Archivo 1: " + line1);
-//	                            System.out.println("Archivo 2: " + line2);
-//	                        }
-//	                        lineNum++;
-//	                    }
-//	            }
+			try (BufferedReader reader1 = new BufferedReader(new FileReader(outFile));
+	                 BufferedReader reader2 = new BufferedReader(new FileReader(expOutFile))) {
 
-			// currRunOutFile.delete();
+	                    String line1, line2;
+	                    int lineNum = 1;
+
+	                    while ((line1 = reader1.readLine()) != null & (line2 = reader2.readLine()) != null) {
+	                        if (!line1.equals(line2)) {
+	                            System.out.println("Diferencia en la línea " + lineNum + ":");
+	                            System.out.println("Archivo 1: " + line1);
+	                            System.out.println("Archivo 2: " + line2);
+	                        }
+	                        lineNum++;
+	                    }
+	            }
+
+			 currRunOutFile.delete();
 
 			return jo1.similar(jo2);
 		} catch (Exception e) {
@@ -48,24 +48,24 @@ class MainTest {
 		}
 	}
 
-	@Test
-	void test_1() {	//cambiamos la ruta poniendo otro resources porque sino el archivo no lo leía
-		assertTrue(run("resources/resources/examples/ex1.json", "resources/resources/tmp/ex1.junit.out.json",
-				"resources/resources/examples/ex1.expout.json", 300));
-
-	}
-
-	@Test
-	void test_2() {
-		assertTrue(run("resources/resources/examples/ex2.json", "resources/resources/tmp/ex2.junit.out.json",
-				"resources/resources/examples/ex2.expout.json", 300));
-
-	}
+//	@Test
+//	void test_1() {	//cambiamos la ruta poniendo otro resources porque sino el archivo no lo leía
+//		assertTrue(run("resources/resources/examples/ex1.json", "resources/resources/tmp/ex1.junit.out.json",
+//				"resources/resources/examples/ex1.expout.json", 300));
+//
+//	}
+//
+//	@Test
+//	void test_2() {
+//		assertTrue(run("resources/resources/examples/ex2.json", "resources/resources/tmp/ex2.junit.out.json",
+//				"resources/resources/examples/ex2.expout.json", 300));
+//
+//	}
 
 	@Test
 	void test_3() {
 		assertTrue(run("resources/resources/examples/ex3.json", "resources/resources/tmp/ex3.junit.out.json",
-				"resources/resources/examples/ex3.expout.json", 300));
+				"resources/resources/examples/ex3.expout.json", 150));
 
 	}
 

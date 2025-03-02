@@ -41,8 +41,6 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 		_maxSpeed = maxSpeed;
 		_contClass = contClass;
 		_itinerary = Collections.unmodifiableList(new ArrayList<>(itinerary));
-		// _currentRoad = new CityRoad("r1", _itinerary.getFirst(), itinerary.get(1),
-		// 100, 10, 1000, Weather.SUNNY);
 		_currentRoad = null;
 		_contJunctions = 0;
 		_state = VehicleStatus.PENDING; // ?
@@ -93,7 +91,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 				
 				_state = VehicleStatus.WAITING;
 				_currentSpeed = 0;
-				_location = 0;
+//				_location = 0;
 				_contJunctions++;
 				_currentRoad.getDest().enter(this);
 
@@ -111,25 +109,29 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			Junction j = _itinerary.getFirst();
 			Junction j1 = _itinerary.get(1);
 			_currentRoad = j.roadTo(j1);
-//			_currentRoad = new CityRoad("r1", _itinerary.getFirst(), _itinerary.get(1), 100, 10, 1000, Weather.SUNNY);
 			_currentRoad.enter(this);
 			_state = VehicleStatus.TRAVELING;
 
 		} else {
-			if (_currentRoad != null) { // Si está en una carretera
+			if (_currentRoad != null && _state == VehicleStatus.WAITING) { // Si está en una carretera
+				_location = 0;
 				_currentRoad.exit(this);
-				if (_state == VehicleStatus.WAITING && _contJunctions == _itinerary.size()) { // Si está esperando en el
-																								// ultimo cruce
+				
+				
+				if (_state == VehicleStatus.WAITING && _contJunctions == _itinerary.size()-1) { // Si está esperando en el ultimo cruce
+																								
 					_state = VehicleStatus.ARRIVED;
 					_currentRoad = null;
 					_currentSpeed = 0;
-				} else {
+				}
+				 else {
 					
 					Junction j = _itinerary.get(_contJunctions);
 					Junction j1 = _itinerary.get(_contJunctions + 1);
 					_currentRoad = j.roadTo(j1);
 					_currentRoad.enter(this);
 					_state = VehicleStatus.TRAVELING;
+					
 
 				}
 			}
