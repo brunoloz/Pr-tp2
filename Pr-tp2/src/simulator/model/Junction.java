@@ -70,8 +70,7 @@ public class Junction extends SimulatedObject {
 
 	public void enter(Vehicle v) {
 		Road r = v.getRoad();
-		List<Vehicle> q = new ArrayList<>(r.getVehicles());
-		_queueByRoad.put(r, q);
+		_queueByRoad.get(r).add(v);
 	}
 
 	public Road roadTo(Junction j) {
@@ -83,14 +82,14 @@ public class Junction extends SimulatedObject {
 
 		if (_greenLightIndex != -1) {
 			Road r = _enterRoads.get(_greenLightIndex);
-			List<Vehicle> q = new ArrayList<>(r.getVehicles());
+			List<Vehicle> q = _queueByRoad.get(r);
 			List<Vehicle> q_to_advance = new ArrayList<>(_dqStrategy.dequeue(q));
 						
 			for (Vehicle v : q_to_advance) {
 				
 				v.moveToNextRoad();
 				q.remove(v);
-				_queueByRoad.put(r, q);
+				
 			}
 		}
 
@@ -121,9 +120,9 @@ public class Junction extends SimulatedObject {
 			JSONArray vehiclesArray = new JSONArray();
 			if (_queueByRoad.get(road) != null) {
 				for (Vehicle v : _queueByRoad.get(road)) {
-					if(v.getStatus()!= VehicleStatus.TRAVELING) {
+					
 					vehiclesArray.put(v.getId());
-					}
+					
 				}
 			}
 			queue.put("vehicles", vehiclesArray);

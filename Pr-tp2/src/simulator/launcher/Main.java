@@ -108,11 +108,12 @@ public class Main {
 	
 	private static void parseTicksFileOption(CommandLine line){
 		String s = line.getOptionValue("t");
-		int t = Integer.parseInt(s);
-		if(t == 0) {
+		int t; 
+		if(s == null) {
 			_timeLimit = 10;
 		}
 		else {
+			t = Integer.parseInt(s);
 			_timeLimit = t;
 		}
 	}

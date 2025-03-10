@@ -109,7 +109,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			_state = VehicleStatus.TRAVELING;
 
 		} else {
-			if (_currentRoad != null || _contJunctions > 0) { // Si está en una carretera
+			if (_currentRoad != null) { // Si está en una carretera
 				_location = 0;
 				_currentRoad.exit(this);
 				
