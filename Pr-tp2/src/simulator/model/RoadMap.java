@@ -53,21 +53,19 @@ public class RoadMap {
 	}
 
 	public void addVehicle(Vehicle v) {
-			if(_vehicleMap.containsKey(v.getId())) {
-				throw new IllegalArgumentException("Ya existe un vehiculo con este id");
-			}
-		
-
+		if (_vehicleMap.containsKey(v.getId())) {
+			throw new IllegalArgumentException("Ya existe un vehiculo con este id");
+		}
 		List<Junction> itinerary = v.getItinerary();
 		int i;
 		boolean b = true;
 		for (i = 1; i < itinerary.size(); i++) {
-	
-				if (itinerary.get(i-1).roadTo(itinerary.get(i)) == null)
-					b = false;
-			
+
+			if (itinerary.get(i - 1).roadTo(itinerary.get(i)) == null)
+				b = false;
+
 		}
-		if(!b)
+		if (!b)
 			throw new IllegalArgumentException("El itinerario de cruces no es válido");
 
 		_vehicles.add(v);
