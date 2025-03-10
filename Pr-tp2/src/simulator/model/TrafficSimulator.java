@@ -1,6 +1,7 @@
 package simulator.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -8,11 +9,12 @@ import java.util.Queue;
 
 import org.json.JSONObject;
 
-public class TrafficSimulator {
+public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 
 	private RoadMap _roadMap;
 	private Queue<Event> _priorityQueue;
 	private int _time;
+	private TrafficSimObserver _observer;
 
 	public TrafficSimulator() {
 		this._roadMap = new RoadMap();
@@ -20,11 +22,13 @@ public class TrafficSimulator {
 		this._time = 0;
 	}
 
+	
 	public void addEvent(Event e) {
 		if(e.getTime() <= _time)
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
+		_observer.onEventAdded(_roadMap, _priorityQueue, e, _time);
 
 	}
 
@@ -46,12 +50,16 @@ public class TrafficSimulator {
 			r.advance(_time);
 		}
 		
+		_observer.onAdvance(_roadMap, _priorityQueue, _time);
+		
 	}
 
 	public void reset() {
 		_roadMap.reset();
 		_priorityQueue.clear();
 		_time = 0;
+		_observer.onReset(_roadMap, _priorityQueue, _time);
+
 	}
 
 	public JSONObject report() {
@@ -63,5 +71,20 @@ public class TrafficSimulator {
 		return j;
 
 	}
+
+
+	@Override
+	public void addObserver(TrafficSimObserver o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void removeObserver(TrafficSimObserver o) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
