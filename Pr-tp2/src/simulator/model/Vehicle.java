@@ -94,6 +94,9 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			}
 
 		}
+		else {
+			throw new IllegalArgumentException("NO SE PUEDE AVANZAR UN VEHICULO QUE NO ESTE EN ESTADO TRAVELLING");
+		}
 	}
 
 	void moveToNextRoad() throws IllegalArgumentException {
