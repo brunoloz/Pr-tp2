@@ -163,7 +163,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 		return jo1;
 	}
 
-	int getLocation() {
+	public int getLocation() {
 		return _location;
 	}
 
@@ -175,11 +175,11 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 		return _maxSpeed;
 	}
 
-	int getContClass() {
+	public int getContClass() {
 		return _contClass;
 	}
 
-	VehicleStatus getStatus() {
+	public VehicleStatus getStatus() {
 		return _state;
 	}
 
@@ -191,7 +191,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 		return _itinerary;
 	}
 
-	Road getRoad() {
+	public Road getRoad() {
 		return _currentRoad;
 	}
 
