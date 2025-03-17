@@ -10,5 +10,7 @@ public class NewCityRoadEvent extends NewRoadEvent {
     protected Road createRoad(String id, Junction src, Junction dest, int maxSpeed, int co2Limit, int length, Weather weather) {
         return new CityRoad(id, src, dest, maxSpeed, co2Limit, length, weather);
     }
+    
+    
 
 }

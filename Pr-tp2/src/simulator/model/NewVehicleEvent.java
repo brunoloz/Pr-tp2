@@ -5,23 +5,23 @@ import java.util.List;
 
 public class NewVehicleEvent extends Event {
 
-	private String id;
-    private int maxSpeed;
-    private int contClass;
-    private List<String> itinerary;
+	private String _id;
+    private int _maxSpeed;
+    private int _contClass;
+    private List<String> _itinerary;
 
     public NewVehicleEvent(int time, String id, int maxSpeed, int contClass, List<String> itinerary) {
         super(time);
-        this.id = id;
-        this.maxSpeed = maxSpeed;
-        this.contClass = contClass;
-        this.itinerary = itinerary;
+        this._id = id;
+        this._maxSpeed = maxSpeed;
+        this._contClass = contClass;
+        this._itinerary = itinerary;
     }
 
     @Override
     public void execute(RoadMap roadMap) {
         List<Junction> route = new ArrayList<>();
-        for (String juncId : itinerary) {
+        for (String juncId : _itinerary) {
             Junction junc = roadMap.getJunction(juncId);
             if (junc == null) {
                 throw new IllegalArgumentException("El cruce " + juncId + " no existe en el mapa");
@@ -29,8 +29,13 @@ public class NewVehicleEvent extends Event {
             route.add(junc);
         }
         
-        Vehicle vehicle = new Vehicle(id, maxSpeed, contClass, route);
+        Vehicle vehicle = new Vehicle(_id, _maxSpeed, _contClass, route);
         roadMap.addVehicle(vehicle);
         vehicle.moveToNextRoad();
+    }
+    
+    @Override
+    public String toString() {
+    	return "New Vehicle '"+ _id +"'";
     }
 }

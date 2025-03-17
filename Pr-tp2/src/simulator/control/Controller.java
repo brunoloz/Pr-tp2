@@ -88,12 +88,26 @@ public class Controller implements Observable<TrafficSimObserver>{
 	@Override
 	public void addObserver(TrafficSimObserver o) {
 		// TODO Auto-generated method stub
+		_trafficSimulator.addObserver(o);
 		
 	}
 
 	@Override
 	public void removeObserver(TrafficSimObserver o) {
 		// TODO Auto-generated method stub
+		_trafficSimulator.removeObserver(o);
+		
+	}
+	
+	public void addEvent(Event e) {
+		_trafficSimulator.addEvent(e);
+	}
+	
+	public void run(int n) {
+		
+		for(int i = 0; i < n; i++) {
+			_trafficSimulator.advance();
+		}
 		
 	}
 }
