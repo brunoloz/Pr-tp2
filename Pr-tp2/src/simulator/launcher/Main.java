@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -34,6 +36,7 @@ import simulator.model.DequeuingStrategy;
 import simulator.model.Event;
 import simulator.model.LightSwitchingStrategy;
 import simulator.model.TrafficSimulator;
+import simulator.view.MainWindow;
 
 public class Main {
 
@@ -41,6 +44,7 @@ public class Main {
 	private static String _outFile = null;
 	private static Factory<Event> _eventsFactory = null;
 	private static int _timeLimit = 0;
+	private static String _mode;
 
 	private static void parseArgs(String[] args) {
 
@@ -57,6 +61,7 @@ public class Main {
 			parseInFileOption(line);
 			parseOutFileOption(line);
 			parseTicksFileOption(line);
+			parseModeOption(line);
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -84,7 +89,36 @@ public class Main {
 				Option.builder("o").longOpt("output").hasArg().desc("Output file, where reports are written.").build());
 		cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message").build());
 		cmdLineOptions.addOption(Option.builder("t").longOpt("ticks").hasArg().desc("Ticks to the simulator's main loop (default value is 10)").build());
+		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg().desc("").build());
+		
 		return cmdLineOptions;
+	}
+	
+	
+	private static void parseModeOption(CommandLine line) {
+		if(line.getOptionValue("m") == null) {
+			_mode = "gui";
+		}
+		else {
+			String s = line.getOptionValue("m");
+			switch(s) {
+			case "":
+				_mode = "gui";
+				break;
+			case "gui":
+				_mode = "gui";
+				break;
+			case "console":
+				_mode = "console";
+				break;
+			default:
+				_mode = "gui";
+				break;
+			}
+		}
+		
+		
+		
 	}
 
 	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) {
@@ -97,7 +131,7 @@ public class Main {
 
 	private static void parseInFileOption(CommandLine line) throws ParseException {
 		_inFile = line.getOptionValue("i");
-		if (_inFile == null) {
+		if (_mode == "batch" && _inFile == null) {
 			throw new ParseException("An events file is missing");
 		}
 	}
@@ -167,11 +201,32 @@ public class Main {
 	        System.err.println("Error en la simulación: " + e.getMessage());
 	    }
 	}
+	
+	private static void startGuiMode() throws IOException {
+
+		TrafficSimulator sim = new TrafficSimulator();
+		Controller ctrl = new Controller(sim, _eventsFactory);
+
+		SwingUtilities.invokeLater(new Runnable() {	
+			@Override
+			public void run() {
+				new MainWindow(ctrl);
+			}
+		}); 
+
+	}
 
 	private static void start(String[] args) throws IOException {
 		initFactories();
 		parseArgs(args);
-		startBatchMode();
+		switch (_mode) {
+        case "batch":
+            startBatchMode();
+            break;
+        case "gui":
+            startGuiMode();
+            break;
+    }
 	}
 
 	// example command lines:

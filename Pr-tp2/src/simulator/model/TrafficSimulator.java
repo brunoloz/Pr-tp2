@@ -76,7 +76,11 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 	@Override
 	public void addObserver(TrafficSimObserver o) {
 		// TODO Auto-generated method stub
-		_observer.onRegister(_roadMap, _priorityQueue, _time);
+		if (o == null) {
+	        throw new IllegalArgumentException("Observer cannot be null");
+	    }
+	    this._observer = o; // Asignar el observador
+	    _observer.onRegister(_roadMap, _priorityQueue, _time);
 	}
 
 
