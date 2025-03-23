@@ -4,12 +4,16 @@ import java.util.Collection;
 
 import javax.swing.table.AbstractTableModel;
 
+import simulator.control.Controller;
 import simulator.model.Event;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 
 public class RoadsTableModel extends AbstractTableModel implements TrafficSimObserver{
 
+	public RoadsTableModel(Controller ctrl) {
+		ctrl.addObserver(this);
+	}
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub

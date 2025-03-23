@@ -1,6 +1,8 @@
 package simulator.view;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -11,28 +13,47 @@ import simulator.model.TrafficSimObserver;
 
 public class EventsTableModel extends AbstractTableModel implements TrafficSimObserver{
 	
-	private Controller _ctr;
+//	private Controller _ctr;
+	private String[] _headers = {"Time", "Description"};
+	private List<Event> _miInfo = new ArrayList<Event>();
+	
+	
+	public String getColumnName(int columnIndex) {
+		return _headers[columnIndex];
+	}
 	
 	public EventsTableModel(Controller ctr) {
-		_ctr = ctr;
+		ctr.addObserver(this);
 	}
 
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this._miInfo.size();
 	}
 
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _headers.length;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		Event e = _miInfo.get(rowIndex);
+		String val = "";
+		
+		switch(columnIndex) {
+		case 0:
+			int t = e.getTime();
+			val = Integer.toString(t);
+			break;
+		case 1:
+			val = e.toString();
+			break;
+		}
+		return val;
 	}
 
 	@Override
@@ -58,5 +79,6 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }
