@@ -1,5 +1,8 @@
 package simulator.view;
 
+import javax.swing.*;
+import java.awt.*;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,6 +22,8 @@ public class MainWindow extends JFrame {
 
 	public MainWindow(Controller ctrl) {
 		super("Traffic Simulator");
+		ImageIcon h = new ImageIcon("resources/icons/car_front.png");
+		this.setIconImage(h.getImage());
 		_ctrl = ctrl;
 		initGUI();
 	}
