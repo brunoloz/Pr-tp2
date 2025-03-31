@@ -1,5 +1,6 @@
 package simulator.view;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,8 +14,9 @@ import simulator.model.Vehicle;
 
 public class VehiclesTableModel extends AbstractTableModel implements TrafficSimObserver{
 
-	private List<Vehicle> miInfo;
-	String[] _headers = {"Vehicle_Id", };
+	private List<Vehicle> _miInfo = new ArrayList<Vehicle>();
+	String[] _headers = {"Id", "Location", "Itinerary", "CO2 Class", "Max. Speed", "Speed", "Total CO2", "Distance"};
+	
 	
 	public VehiclesTableModel(Controller ctr) {
 		ctr.addObserver(this);
@@ -22,13 +24,13 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _miInfo.size();
 	}
 
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _headers.length;
 	}
 
 	@Override

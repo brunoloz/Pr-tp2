@@ -19,6 +19,7 @@ public class Controller implements Observable<TrafficSimObserver>{
 
 	private TrafficSimulator _trafficSimulator;
 	private Factory<Event> _eventsFactory;
+	
 
 	public Controller(TrafficSimulator sim, Factory<Event> eventsFactory) {
 		if (sim == null || eventsFactory == null) {
@@ -26,8 +27,10 @@ public class Controller implements Observable<TrafficSimObserver>{
 		}
 		this._trafficSimulator = sim;
 		this._eventsFactory = eventsFactory;
+		
 
 	}
+	
 
 	public void loadEvents(InputStream in) {
 
@@ -48,6 +51,10 @@ public class Controller implements Observable<TrafficSimObserver>{
         }
 	}
 
+	
+	
+
+	
 	public void run(int n, OutputStream out) {
 
 		if (n < 0 || out == null) {

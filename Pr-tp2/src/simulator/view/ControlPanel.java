@@ -145,8 +145,13 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
             if (sel == JFileChooser.APPROVE_OPTION) {
                 try {
-                    JSONObject inputJson = new JSONObject(new JSONTokener(new FileInputStream(_fc.getSelectedFile())));
+                    //JSONObject inputJson = new JSONObject(new JSONTokener(new FileInputStream(_fc.getSelectedFile())));
+                    FileInputStream inputStream = new FileInputStream(_fc.getSelectedFile());
+                    _ctr.loadEvents(inputStream);
                 
+                    
+                    //ViewUtils.showInfoMsg(open, "Archivo cargado correctamente.");
+                    //System.out.println(inputJson.toString(2));
                 } catch (JSONException e) {
                     ViewUtils.showErrorMsg(open, "El archivo no tiene el formato correcto");
                 } catch (FileNotFoundException ignored) {

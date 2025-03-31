@@ -15,6 +15,7 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 	private Queue<Event> _priorityQueue;
 	private int _time;
 	private TrafficSimObserver _observer;
+	
 
 	public TrafficSimulator() {
 		this._roadMap = new RoadMap();

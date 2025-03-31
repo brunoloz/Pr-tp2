@@ -37,6 +37,10 @@ public class ViewUtils {
 	public static void showErrorMsg(Component c, String msg) {
 		JOptionPane.showMessageDialog(getWindow(c), msg, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
+	
+	public static void showInfoMsg(Component c, String msg) {
+		JOptionPane.showMessageDialog(getWindow(c), msg, "AVISO", JOptionPane.INFORMATION_MESSAGE);
+	}
 
 	/*
 	 * asks the user to confirm a quit action, and quits using System.exit. The

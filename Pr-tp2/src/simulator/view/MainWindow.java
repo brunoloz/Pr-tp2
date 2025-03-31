@@ -1,24 +1,17 @@
 package simulator.view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
 import java.awt.*;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import simulator.control.Controller;
 
 public class MainWindow extends JFrame {
 
 	private Controller _ctrl;
+	private Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
 
 	public MainWindow(Controller ctrl) {
 		super("Traffic Simulator");
@@ -50,23 +43,46 @@ public class MainWindow extends JFrame {
 		JPanel eventsView = createViewPanel(new JTable(new EventsTableModel(_ctrl)), "Events");
 		eventsView.setPreferredSize(new Dimension(500, 200));
 		tablesPanel.add(eventsView);
-		// TODO add other tables
-		JPanel junctionsView = createViewPanel(new JTable(new JunctionsTableModel(_ctrl)), "Junctions");
-		junctionsView.setPreferredSize(new Dimension(500, 200));
-		tablesPanel.add(junctionsView);
+		
+		eventsView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Events", TitledBorder.LEFT, TitledBorder.TOP));
+		
+		
+		JPanel vehiclesView = createViewPanel(new JTable(new VehiclesTableModel(_ctrl)), "Vehicles");
+		vehiclesView.setPreferredSize(new Dimension(500, 200));
+		tablesPanel.add(vehiclesView);
+		
+		vehiclesView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Vehicles", TitledBorder.LEFT, TitledBorder.TOP));
+		
 		
 		JPanel roadsView = createViewPanel(new JTable(new RoadsTableModel(_ctrl)), "Roads");
 		roadsView.setPreferredSize(new Dimension(500, 200));
 		tablesPanel.add(roadsView);
 		
-		JPanel vehiclesView = createViewPanel(new JTable(new VehiclesTableModel(_ctrl)), "Vehicles");
-		vehiclesView.setPreferredSize(new Dimension(500, 200));
-		tablesPanel.add(vehiclesView);
+		roadsView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Roads", TitledBorder.LEFT, TitledBorder.TOP));
+		
+		// TODO add other tables
+		JPanel junctionsView = createViewPanel(new JTable(new JunctionsTableModel(_ctrl)), "Junctions");
+		junctionsView.setPreferredSize(new Dimension(500, 200));
+		tablesPanel.add(junctionsView);
+		
+		
+		junctionsView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Junctions", TitledBorder.LEFT, TitledBorder.TOP));
+		
 
 		// maps
 		JPanel mapView = createViewPanel(new MapComponent(_ctrl), "Map");
 		mapView.setPreferredSize(new Dimension(500, 400));
 		mapsPanel.add(mapView);
+		
+		
+		mapView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Map", TitledBorder.LEFT, TitledBorder.TOP));
+		
+		JPanel mapByRoadView = createViewPanel(new MapComponent(_ctrl), "MapByRoad");
+		mapByRoadView.setPreferredSize(new Dimension(500, 400));
+		mapsPanel.add(mapByRoadView);
+		
+		mapByRoadView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Map", TitledBorder.LEFT, TitledBorder.TOP));
+		
 		// TODO add a map for MapByRoadComponent
 		// ...
 		
