@@ -15,8 +15,9 @@ import simulator.model.Weather;
 
 public class RoadsTableModel extends AbstractTableModel implements TrafficSimObserver{
 
-	private String[] _headers = {"Road_id", "Length", "Weather", "Max_speed", "Current_speed", "Total_CO2", "CO2_limit"};
+	
 	private List<Road> _miInfo = new ArrayList<Road>();
+	private String[] _headers = {"Road_id", "Length", "Weather", "Max_speed", "Current_speed", "Total_CO2", "CO2_limit"};
 	
 	public RoadsTableModel(Controller ctrl) {
 		ctrl.addObserver(this);
@@ -31,6 +32,10 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return this._headers.length;
+	}
+	
+	public String getColumnName(int columnIndex) {
+		return _headers[columnIndex];
 	}
 
 	@Override

@@ -14,8 +14,9 @@ import simulator.model.TrafficSimObserver;
 
 public class JunctionsTableModel extends AbstractTableModel implements TrafficSimObserver{
 
+	
+	private List<Junction> _junctions = new ArrayList<Junction>();
 	String _headers[] = {"Id", "Green", "Queues"};
-	List<Junction> _junctions = new ArrayList<Junction>();
 	
 	public JunctionsTableModel(Controller ctr) {
 		ctr.addObserver(this);
@@ -31,6 +32,10 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return this._headers.length;
+	}
+	
+	public String getColumnName(int columnIndex) {
+		return _headers[columnIndex];
 	}
 
 	@Override
