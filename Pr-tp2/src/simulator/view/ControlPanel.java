@@ -62,6 +62,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	
 	public ControlPanel(Controller ctr) {
 		_ctr = ctr;
+		_ctr.addObserver(this);
 		initGUI();
 	}
 	
@@ -95,7 +96,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
         _toolaBar.add(_ticksLabel);
         
         
-        _ticksSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 10000, 10));
+        _ticksSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10000, 1));
         _ticksSpinner.setToolTipText("Simulation steps to run: 1-10000");
         _ticksSpinner.setMaximumSize(new Dimension(80, 40));
         _ticksSpinner.setMinimumSize(new Dimension(80, 40));
@@ -297,6 +298,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 	private JButton runButton() {
 		JButton open = new JButton(new ImageIcon("resources/icons/run.png"));
+		open.addActionListener(e -> _ctr.run(1));
 
 		return open;
 	}

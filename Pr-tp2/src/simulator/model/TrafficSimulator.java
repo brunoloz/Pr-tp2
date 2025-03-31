@@ -14,12 +14,13 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 	private RoadMap _roadMap;
 	private Queue<Event> _priorityQueue;
 	private int _time;
-	private TrafficSimObserver _observer;
+	private List<TrafficSimObserver> _observer;
 	
 
 	public TrafficSimulator() {
 		this._roadMap = new RoadMap();
 		this._priorityQueue = new PriorityQueue<Event>();
+		this._observer = new ArrayList<TrafficSimObserver>();
 		this._time = 0;
 	}
 
@@ -29,7 +30,10 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
-		_observer.onEventAdded(_roadMap, _priorityQueue, e, _time);
+		for(TrafficSimObserver t : _observer) {
+			t.onEventAdded(_roadMap, _priorityQueue, e, _time);
+		}
+		//_observer.onEventAdded(_roadMap, _priorityQueue, e, _time);
 
 	}
 
@@ -51,7 +55,10 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 			r.advance(_time);
 		}
 		
-		_observer.onAdvance(_roadMap, _priorityQueue, _time);
+		for(TrafficSimObserver t : _observer) {
+			t.onAdvance(_roadMap, _priorityQueue, _time);
+		}
+		
 		
 	}
 
@@ -59,7 +66,10 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 		_roadMap.reset();
 		_priorityQueue.clear();
 		_time = 0;
-		_observer.onReset(_roadMap, _priorityQueue, _time);
+		
+		for(TrafficSimObserver t : _observer) {
+			t.onReset(_roadMap, _priorityQueue, _time);
+		}
 
 	}
 
@@ -80,8 +90,8 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 		if (o == null) {
 	        throw new IllegalArgumentException("Observer cannot be null");
 	    }
-	    this._observer = o; // Asignar el observador
-	    _observer.onRegister(_roadMap, _priorityQueue, _time);
+	   // this._observer = o; // Asignar el observador
+	    o.onRegister(_roadMap, _priorityQueue, _time);
 	}
 
 

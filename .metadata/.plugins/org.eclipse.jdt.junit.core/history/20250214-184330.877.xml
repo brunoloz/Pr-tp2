@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="JunctionTest" project="Pr-tp2" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="simulator.model.JunctionTest" time="0.001" displayname="JunctionTest" uniqueid="[engine:junit-jupiter]/[class:simulator.model.JunctionTest]">
-    <testcase name="test_1" classname="simulator.model.JunctionTest" time="0.001" displayname="test_1()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.JunctionTest]/[method:test_1()]"/>
-    <testcase name="error_handling" classname="simulator.model.JunctionTest" time="0.0" displayname="error_handling()" uniqueid="[engine:junit-jupiter]/[class:simulator.model.JunctionTest]/[method:error_handling()]"/>
-  </testsuite>
-</testrun>

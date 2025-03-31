@@ -46,6 +46,8 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
+		_miInfo = map.getVehicles();
+		fireTableStructureChanged();
 		
 	}
 

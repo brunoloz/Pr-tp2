@@ -80,7 +80,8 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
-		
+		this._miInfo = map.getRoads();
+		fireTableStructureChanged();
 	}
 
 	@Override
