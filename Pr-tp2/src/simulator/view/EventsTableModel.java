@@ -80,7 +80,7 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		// TODO Auto-generated method stub
 		//_miInfo.add(e);
 		_miInfo = new ArrayList<>(events); 
-		_miInfo.// Guardamos la lista actualizada de eventos
+		//_miInfo.// Guardamos la lista actualizada de eventos
 		fireTableDataChanged(); // Refrescamos la tabla
 		
 	}
