@@ -30,6 +30,7 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
+		//_observer.add(e);
 		for(TrafficSimObserver t : _observer) {
 			t.onEventAdded(_roadMap, _priorityQueue, e, _time);
 		}
@@ -82,6 +83,8 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 		return j;
 
 	}
+	
+	
 
 
 	@Override
@@ -91,6 +94,7 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 	        throw new IllegalArgumentException("Observer cannot be null");
 	    }
 	   // this._observer = o; // Asignar el observador
+		_observer.add(o);
 	    o.onRegister(_roadMap, _priorityQueue, _time);
 	}
 

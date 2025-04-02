@@ -23,4 +23,20 @@ public class SetWeatherEvent extends Event {
             road.setWeather(pair.getSecond());
         }
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Change Weather: [");
+        for (int i = 0; i < ws.size(); i++) {
+            Pair<String, Weather> pair = ws.get(i);
+            sb.append("(").append(pair.getFirst()).append(", ").append(pair.getSecond()).append(")");
+            if (i < ws.size() - 1) {
+                sb.append(", "); // Agregar coma solo entre elementos
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
 }

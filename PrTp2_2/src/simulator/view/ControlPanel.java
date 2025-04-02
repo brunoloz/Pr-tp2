@@ -55,6 +55,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	private JButton _quitButton;
 	private JButton _soundButton;
 	private JDialog _co2Dialog;
+	private JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();;
 	//private int tck;
 	
 	//CANCION
@@ -205,7 +206,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	    
 	    // Panel central con JComboBox
 	    JPanel centerPanel = new JPanel();
-	    JComboBox<String> vehicleComboBox = new JComboBox<>();
+	    JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();
 	    JComboBox<Integer> co2ClassComboBox = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
 	    JSpinner ticks = new JSpinner(new SpinnerNumberModel(10, 1, 10000, 10));
 	    centerPanel.add(new JLabel("Vehicle: "));
@@ -376,6 +377,9 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
 		// TODO Auto-generated method stub
+		for(int i = 0; i < map.getVehicles().size(); i++) {
+			vehicleComboBox.addItem(map.getVehicles().get(i));
+		}
 		
 	}
 

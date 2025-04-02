@@ -36,7 +36,20 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) { //Si se usan enumerados puede ser automático y no se necesitan switch o if/else
 		// TODO Auto-generated method stub
-		return null;
+		Vehicle v = _miInfo.get(rowIndex); // Obtener el vehículo de la fila correspondiente
+	    
+	    switch (columnIndex) {
+	        case 0: return v.getId(); // ID del vehículo
+	        case 1: return v.getLocation(); // Ubicación actual
+	        case 2: return v.getItinerary(); // Itinerario
+	        case 3: return v.getContClass(); // Clase de CO2
+	        case 4: return v.getMaxSpeed(); // Velocidad máxima
+	        case 5: return v.getSpeed(); // Velocidad actual
+	        case 6: return v.getTotalCO2(); // Emisión total de CO2
+	        case 7: return v.getDistance(); // Distancia recorrida
+	        default: return null;
+	    }
+		
 	}
 	
 	public String getColumnName(int columnIndex) {

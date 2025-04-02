@@ -77,7 +77,7 @@ public class MainWindow extends JFrame {
 		
 		mapView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Map", TitledBorder.LEFT, TitledBorder.TOP));
 		
-		JPanel mapByRoadView = createViewPanel(new MapByRoadComponent(), "MapByRoad");
+		JPanel mapByRoadView = createViewPanel(new MapByRoadComponent(_ctrl), "MapByRoad");
 		mapByRoadView.setPreferredSize(new Dimension(500, 400));
 		mapsPanel.add(mapByRoadView);
 		

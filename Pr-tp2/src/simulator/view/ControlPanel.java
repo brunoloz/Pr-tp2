@@ -55,6 +55,8 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	private JButton _quitButton;
 	private JButton _soundButton;
 	private JDialog _co2Dialog;
+	private JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();;
+	//private int tck;
 	
 	//CANCION
 	private static Clip _clip;
@@ -63,6 +65,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	public ControlPanel(Controller ctr) {
 		_ctr = ctr;
 		_ctr.addObserver(this);
+		_ticksSpinner = new JSpinner();
 		initGUI();
 	}
 	
@@ -148,6 +151,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
                 try {
                     //JSONObject inputJson = new JSONObject(new JSONTokener(new FileInputStream(_fc.getSelectedFile())));
                     FileInputStream inputStream = new FileInputStream(_fc.getSelectedFile());
+                    _ctr.reset();
                     _ctr.loadEvents(inputStream);
                 
                     
@@ -202,7 +206,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	    
 	    // Panel central con JComboBox
 	    JPanel centerPanel = new JPanel();
-	    JComboBox<String> vehicleComboBox = new JComboBox<>();
+	    JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();
 	    JComboBox<Integer> co2ClassComboBox = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
 	    JSpinner ticks = new JSpinner(new SpinnerNumberModel(10, 1, 10000, 10));
 	    centerPanel.add(new JLabel("Vehicle: "));
@@ -298,7 +302,19 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 	private JButton runButton() {
 		JButton open = new JButton(new ImageIcon("resources/icons/run.png"));
-		open.addActionListener(e -> _ctr.run(1));
+		
+		open.addActionListener(new ActionListener() {
+			
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int tck = (int) _ticksSpinner.getValue();
+				System.out.println("hola");
+				_ctr.run(tck);
+			}
+			
+		});
 
 		return open;
 	}
@@ -361,6 +377,9 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
 		// TODO Auto-generated method stub
+		for(int i = 0; i < map.getVehicles().size(); i++) {
+			vehicleComboBox.addItem(map.getVehicles().get(i));
+		}
 		
 	}
 

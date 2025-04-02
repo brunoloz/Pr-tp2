@@ -9,6 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import simulator.control.Controller;
 import simulator.model.Event;
 import simulator.model.Junction;
+import simulator.model.Road;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 
@@ -41,7 +42,25 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		Junction j = this._junctions.get(rowIndex);
+		List<Road> roads = j.getInRoads();;
+		String val = "";
+		switch(columnIndex) {
+		case 0:
+			val = j.getId();
+			break;
+		case 1:
+			int i = j.getGreenLightIndex();
+			Road r = roads.get(i);
+			val = r.toString();
+			break;
+		case 2:
+			for(Road r1 : roads) {
+				val = r1.getId() + ":[" + r1.getVehicles().toString() + "]";
+			}
+			break;
+		}
+		return val;
 	}
 
 	@Override

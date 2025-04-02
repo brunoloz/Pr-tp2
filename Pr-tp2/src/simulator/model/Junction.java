@@ -46,6 +46,8 @@ public class Junction extends SimulatedObject {
 		_queueByRoad = new HashMap<Road, List<Vehicle>>();
 		_lsStrategy = lsStrategy;
 		_dqStrategy = dqStrategy;
+		this.xCoor = xCoor;
+		this.yCoor = yCoor;
 
 	}
 
