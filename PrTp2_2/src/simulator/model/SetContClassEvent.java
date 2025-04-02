@@ -23,4 +23,20 @@ public class SetContClassEvent extends Event {
             vehicle.setContClass(pair.getSecond());
         }
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Change CO2 Class: [");
+        for (int i = 0; i < cs.size(); i++) {
+            Pair<String, Integer> pair = cs.get(i);
+            sb.append("(").append(pair.getFirst()).append(", ").append(pair.getSecond()).append(")");
+            if (i < cs.size() - 1) {
+                sb.append(", "); // Agregar coma solo entre elementos
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
 }

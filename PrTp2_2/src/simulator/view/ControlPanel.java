@@ -55,6 +55,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	private JButton _quitButton;
 	private JButton _soundButton;
 	private JDialog _co2Dialog;
+	//private int tck;
 	
 	//CANCION
 	private static Clip _clip;
@@ -63,6 +64,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	public ControlPanel(Controller ctr) {
 		_ctr = ctr;
 		_ctr.addObserver(this);
+		_ticksSpinner = new JSpinner();
 		initGUI();
 	}
 	
@@ -148,6 +150,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
                 try {
                     //JSONObject inputJson = new JSONObject(new JSONTokener(new FileInputStream(_fc.getSelectedFile())));
                     FileInputStream inputStream = new FileInputStream(_fc.getSelectedFile());
+                    _ctr.reset();
                     _ctr.loadEvents(inputStream);
                 
                     
@@ -298,7 +301,19 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 	private JButton runButton() {
 		JButton open = new JButton(new ImageIcon("resources/icons/run.png"));
-		open.addActionListener(e -> _ctr.run(1));
+		
+		open.addActionListener(new ActionListener() {
+			
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int tck = (int) _ticksSpinner.getValue();
+				System.out.println("hola");
+				_ctr.run(tck);
+			}
+			
+		});
 
 		return open;
 	}

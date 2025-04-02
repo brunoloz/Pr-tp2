@@ -12,10 +12,11 @@ import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Event;
 import simulator.model.Observable;
+import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 import simulator.model.TrafficSimulator;
 
-public class Controller implements Observable<TrafficSimObserver>{
+public class Controller {
 
 	private TrafficSimulator _trafficSimulator;
 	private Factory<Event> _eventsFactory;
@@ -30,6 +31,8 @@ public class Controller implements Observable<TrafficSimObserver>{
 		
 
 	}
+	
+	
 	
 
 	public void loadEvents(InputStream in) {
@@ -92,14 +95,14 @@ public class Controller implements Observable<TrafficSimObserver>{
 		_trafficSimulator.reset();
 	}
 
-	@Override
+	//@Override
 	public void addObserver(TrafficSimObserver o) {
 		// TODO Auto-generated method stub
 		_trafficSimulator.addObserver(o);
 		
 	}
 
-	@Override
+	//@Override
 	public void removeObserver(TrafficSimObserver o) {
 		// TODO Auto-generated method stub
 		_trafficSimulator.removeObserver(o);
