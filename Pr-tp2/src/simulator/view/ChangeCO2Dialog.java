@@ -75,11 +75,10 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver{
 	     
 	     JPanel panelDerecho = new JPanel();
          
-	     
 	     area = new JTextArea(15,15);
 	     area.setEditable(false);
 	     
-       JPanel panelBotones = new JPanel(new FlowLayout());
+	     JPanel panelBotones = new JPanel(new FlowLayout());
 		 
 		 JButton ok = new JButton("OK");
 		 ok.addActionListener(new ActionListener(){

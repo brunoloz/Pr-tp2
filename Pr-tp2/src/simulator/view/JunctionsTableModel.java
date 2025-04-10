@@ -12,6 +12,8 @@ import simulator.model.Junction;
 import simulator.model.Road;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
+import simulator.model.Vehicle;
+import simulator.model.VehicleStatus;
 
 public class JunctionsTableModel extends AbstractTableModel implements TrafficSimObserver{
 
@@ -43,20 +45,28 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		Junction j = this._junctions.get(rowIndex);
-		List<Road> roads = j.getInRoads();;
+		List<Road> roads = j.getInRoads();
 		String val = "";
 		switch(columnIndex) {
 		case 0:
 			val = j.getId();
 			break;
 		case 1:
-			int i = j.getGreenLightIndex();
-			Road r = roads.get(i);
-			val = r.toString();
+			int greenIdx = j.getGreenLightIndex();
+			if (greenIdx == -1 || greenIdx >= roads.size()) {
+				val = "NONE";
+			} else {
+				val = roads.get(greenIdx).getId();
+			}
 			break;
+			//val = roads.get(j.getGreenLightIndex()).toString();
 		case 2:
 			for(Road r1 : roads) {
-				val = r1.getId() + ":[" + r1.getVehicles().toString() + "]";
+				List<Vehicle> lv = new ArrayList<Vehicle>();
+				for(Vehicle v : r1.getVehicles()) {
+					if(v.getStatus() == VehicleStatus.WAITING) lv.add(v);
+				}
+				val += r1.getId() + ":" + lv;
 			}
 			break;
 		}
@@ -66,13 +76,15 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
-		
+		_junctions = new ArrayList<>(map.getJunctions());
+		fireTableDataChanged();
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
 		// TODO Auto-generated method stub
-		
+		_junctions = new ArrayList<>(map.getJunctions());
+		fireTableDataChanged();
 	}
 
 	@Override
