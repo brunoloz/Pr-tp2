@@ -56,6 +56,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	private JButton _soundButton;
 	private JDialog _co2Dialog;
 	private JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();;
+	private boolean _stopped;
 	//private int tck;
 	
 	//CANCION
@@ -299,6 +300,16 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	    // Mostrar el diálogo
 	    co2Dialog.setVisible(true);
 	}
+	
+	private void enableToolBar(boolean enabled) {
+	    _openButton.setEnabled(enabled);
+	    _co2ClassButton.setEnabled(enabled);
+	    _weatherButton.setEnabled(enabled);
+	    _runButton.setEnabled(enabled);
+	    _stopButton.setEnabled(!enabled); // El botón de parar sólo se habilita cuando corre la simulación
+	    _ticksSpinner.setEnabled(enabled);
+	}
+
 
 	private JButton runButton() {
 		JButton open = new JButton(new ImageIcon("resources/icons/run.png"));
@@ -310,17 +321,45 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				int tck = (int) _ticksSpinner.getValue();
-				System.out.println("hola");
-				_ctr.run(tck);
+		        _stopped = false;
+		        enableToolBar(false);
+				run_sim(tck);
 			}
 			
 		});
 
 		return open;
 	}
+	
+	private void run_sim(int n) {
+	    if (n > 0 && !_stopped) {
+	        try {
+	            _ctr.run(1); // Ejecutar un solo paso
+	            SwingUtilities.invokeLater(() -> run_sim(n - 1)); // Repetir después
+	        } catch (Exception e) {
+	            _stopped = true;
+	            JOptionPane.showMessageDialog(this, "Error durante la simulación: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	            enableToolBar(true);
+	        }
+	    } else {
+	        _stopped = true;
+	        enableToolBar(true);
+	    }
+	}
+
 
 	private JButton stopButton() {
 		JButton open = new JButton(new ImageIcon("resources/icons/stop.png"));
+		
+		open.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+		        _stopped = true;
+			}
+			
+		});
 
 		return open;
 	}

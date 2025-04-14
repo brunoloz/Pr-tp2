@@ -102,7 +102,10 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 	@Override
 	public void removeObserver(TrafficSimObserver o) {
 		// TODO Auto-generated method stub
-		
+		if (o == null) {
+	        throw new IllegalArgumentException("Observer cannot be null");
+	    }
+		_observer.remove(o);
 	}
 
 

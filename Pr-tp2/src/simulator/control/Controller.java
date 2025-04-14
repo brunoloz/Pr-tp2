@@ -31,9 +31,6 @@ public class Controller {
 		
 
 	}
-	
-	
-	
 
 	public void loadEvents(InputStream in) {
 
