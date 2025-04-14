@@ -87,7 +87,7 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
 		// TODO Auto-generated method stub
-		
+		fireTableStructureChanged();
 	}
 
 	@Override
