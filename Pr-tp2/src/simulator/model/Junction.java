@@ -155,4 +155,8 @@ public class Junction extends SimulatedObject {
 		return _enterRoads;
 	}
 	
+	public List<List<Vehicle>> getQueues(){
+		return _queue;
+	}
+	
 }

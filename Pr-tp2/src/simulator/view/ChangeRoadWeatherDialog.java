@@ -116,6 +116,7 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	        _roads.add(r);
 	        roadComboBox.addItem(r);
 	    }
+	    this._time =time;
 	}
 
 	@Override
