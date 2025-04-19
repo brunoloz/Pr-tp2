@@ -81,8 +81,13 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
         
         _toolaBar.addSeparator();
         
-        _co2ClassButton = co2Button();
+//        _co2ClassButton = co2Button();
+//        _toolaBar.add(_co2ClassButton);
+        
+        ChangeCO2Dialog co2Dialog = new ChangeCO2Dialog(ViewUtils.getWindow(this), _ctr);
+        _co2ClassButton = co2Button(co2Dialog);
         _toolaBar.add(_co2ClassButton);
+        
         
         ChangeRoadWeatherDialog weatherDialog = new ChangeRoadWeatherDialog(ViewUtils.getWindow(this), _ctr);
         _weatherButton = weatherButton(weatherDialog);
@@ -101,7 +106,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
         _toolaBar.add(_ticksLabel);
         
         
-        _ticksSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10000, 1));
+        _ticksSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 10000, 10));
         _ticksSpinner.setToolTipText("Simulation steps to run: 1-10000");
         _ticksSpinner.setMaximumSize(new Dimension(80, 40));
         _ticksSpinner.setMinimumSize(new Dimension(80, 40));
@@ -114,7 +119,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 		//CANCION
         _soundButton = soundButton();
         _toolaBar.add(_soundButton);
-        playMusic("resources/icons/c418.wav");
+        playMusic("resources/icons/Atleti.wav");
         
         _toolaBar.addSeparator();
         
@@ -187,62 +192,16 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 //	}
 	
 	
-	private JButton co2Button() {
-	    JButton open = new JButton(new ImageIcon("resources/icons/co2class.png"));
-	    open.addActionListener(l -> showCo2Dialog());
-	    return open;
+	private JButton co2Button(ChangeCO2Dialog co2Dialog) {
+		JButton open = new JButton(new ImageIcon("resources/icons/co2class.png"));
+		open.addActionListener(e ->{
+			co2Dialog.setLocationRelativeTo(ViewUtils.getWindow(this));
+			co2Dialog.open();
+		});
+		return open;
 	}
 
-	private void showCo2Dialog() {
-	    // Crear el diálogo
-	    JDialog co2Dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Change CO₂ Class", true);
-	    co2Dialog.setLayout(new BorderLayout());
-	    co2Dialog.setSize(800, 200);
-	    co2Dialog.setLocationRelativeTo(this);
-
-	    // Panel superior con texto descriptivo
-	    JPanel topPanel = new JPanel();
-	    JLabel label = new JLabel("<html><b>Schedule an event to change the CO2 class of a vehicle after"
-	    		+ "a given number of simulation ticks from now.</b></html>");
-	    topPanel.add(label);
-	    
-	    // Panel central con JComboBox
-	    JPanel centerPanel = new JPanel();
-	    JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();
-	    JComboBox<Integer> co2ClassComboBox = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-	    JSpinner ticks = new JSpinner(new SpinnerNumberModel(10, 1, 10000, 10));
-	    centerPanel.add(new JLabel("Vehicle: "));
-	    centerPanel.add(vehicleComboBox);
-	    centerPanel.add(new JLabel("CO₂ Class: "));
-	    centerPanel.add(co2ClassComboBox);
-	    centerPanel.add(new JLabel("Ticks: "));
-	    centerPanel.add(ticks);
-	    
-	    // Panel inferior con botones
-	    JPanel bottomPanel = new JPanel();
-	    JButton acceptButton = new JButton("Accept");
-	    JButton cancelButton = new JButton("Cancel");
-	    
-	    acceptButton.addActionListener(e -> {
-	        String selectedVehicle = (String) vehicleComboBox.getSelectedItem();
-	        int selectedCo2 = (int) co2ClassComboBox.getSelectedItem();
-	        System.out.println("Changing " + selectedVehicle + " to CO₂ class " + selectedCo2);
-	        co2Dialog.dispose();
-	    });
-
-	    cancelButton.addActionListener(e -> co2Dialog.dispose());
-
-	    bottomPanel.add(acceptButton);
-	    bottomPanel.add(cancelButton);
-
-	    // Agregar paneles al diálogo
-	    co2Dialog.add(topPanel, BorderLayout.NORTH);
-	    co2Dialog.add(centerPanel, BorderLayout.CENTER);
-	    co2Dialog.add(bottomPanel, BorderLayout.SOUTH);
-
-	    // Mostrar el diálogo
-	    co2Dialog.setVisible(true);
-	}
+	
 
 	private JButton weatherButton(ChangeRoadWeatherDialog weatherDialog) {
 		JButton open = new JButton(new ImageIcon("resources/icons/weather.png"));
@@ -253,56 +212,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 		return open;
 	}
 	
-//	private void showWeatherDialog() {
-//	    // Crear el diálogo
-//	    JDialog co2Dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Change Road Weather", true);
-//	    co2Dialog.setLayout(new BorderLayout());
-//	    co2Dialog.setSize(800, 200);
-//	    co2Dialog.setLocationRelativeTo(this);
-//
-//	    // Panel superior con texto descriptivo
-//	    JPanel topPanel = new JPanel();
-//	    JLabel label = new JLabel("<html><b>Schedule an event to change the weather of a road after"
-//	    		+ "a given number of simulation ticks from now.</b></html>");
-//	    topPanel.add(label);
-//	    
-//	    // Panel central con JComboBox
-//	    JPanel centerPanel = new JPanel();
-//	    JComboBox<Road> roadComboBox = new JComboBox<>(); //??????????????????
-//	    JComboBox<Weather> weatherComboBox = new JComboBox<>(Weather.values());
-//	    JSpinner ticks = new JSpinner(new SpinnerNumberModel(10, 1, 10000, 10));
-//	    centerPanel.add(new JLabel("Road: "));
-//	    centerPanel.add(roadComboBox);
-//	    centerPanel.add(new JLabel("Weather: "));
-//	    centerPanel.add(weatherComboBox);
-//	    centerPanel.add(new JLabel("Ticks: "));
-//	    centerPanel.add(ticks);
-//	    
-//	    // Panel inferior con botones
-//	    JPanel bottomPanel = new JPanel();
-//	    JButton acceptButton = new JButton("Accept");
-//	    JButton cancelButton = new JButton("Cancel");
-//	    
-//	    acceptButton.addActionListener(e -> {
-//	        Road selectedVehicle = (Road) roadComboBox.getSelectedItem();
-//	        Weather selectedCo2 = (Weather) roadComboBox.getSelectedItem();
-//	        System.out.println("Changing " + selectedVehicle.toString() + " to CO₂ class " + selectedCo2);
-//	        co2Dialog.dispose();
-//	    });
-//
-//	    cancelButton.addActionListener(e -> co2Dialog.dispose());
-//
-//	    bottomPanel.add(acceptButton);
-//	    bottomPanel.add(cancelButton);
-//
-//	    // Agregar paneles al diálogo
-//	    co2Dialog.add(topPanel, BorderLayout.NORTH);
-//	    co2Dialog.add(centerPanel, BorderLayout.CENTER);
-//	    co2Dialog.add(bottomPanel, BorderLayout.SOUTH);
-//
-//	    // Mostrar el diálogo
-//	    co2Dialog.setVisible(true);
-//	}
+
 	
 	private void enableToolBar(boolean enabled) {
 	    _openButton.setEnabled(enabled);

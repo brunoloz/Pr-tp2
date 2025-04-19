@@ -28,22 +28,23 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	
 	private Controller _ctrl;
 	private List<Road> _roads = new ArrayList<>();
-	private JDialog _weatherDialog;
 	private int _time = 0;
-    JComboBox<Road> roadComboBox;
-    JComboBox<Weather> weatherComboBox;
+    JComboBox<Road> _roadComboBox;
+    JComboBox<Weather> _weatherComboBox;
     private SpinnerNumberModel n_spinner;
 
 	public ChangeRoadWeatherDialog(Frame f, Controller ctrl) {
 		super(f, true);
 		this._ctrl = ctrl;
+		this.setTitle("Change Road's Weather");
 		initGUI();
+		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		_ctrl.addObserver(this);
 	}
 	
 	private void initGUI() {
 		
-		this.setTitle("Change Road's Weather");
+		
 		this.setLayout(new BorderLayout());
 		this.setSize(800, 200);
 		
@@ -58,14 +59,14 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	    n_spinner = new SpinnerNumberModel(10, 1, 10000, 10);
 	    JSpinner ticks = new JSpinner(n_spinner);
 	    centerPanel.add(new JLabel("Road: "));
-	    roadComboBox = new JComboBox<Road>();
+	    _roadComboBox = new JComboBox<Road>();
 	    //roadComboBox.setMaximumSize(new Dimension(200, 20));
-	    centerPanel.add(roadComboBox);
+	    centerPanel.add(_roadComboBox);
 	    
 	    centerPanel.add(new JLabel("Weather: "));
-	    weatherComboBox = new JComboBox<>(Weather.values());
+	    _weatherComboBox = new JComboBox<>(Weather.values());
 	    //weatherComboBox.setMaximumSize(new Dimension(200, 20));
-	    centerPanel.add(weatherComboBox);
+	    centerPanel.add(_weatherComboBox);
 	    
 	    centerPanel.add(new JLabel("Ticks: "));
 	    centerPanel.add(ticks);
@@ -77,8 +78,8 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	    
 	    acceptButton.addActionListener(e->{
 	    	if(!_roads.isEmpty()) {
-		        Road selectedRoad = (Road) roadComboBox.getSelectedItem();
-		        Weather selectedWeather = (Weather) weatherComboBox.getSelectedItem();
+		        Road selectedRoad = (Road) _roadComboBox.getSelectedItem();
+		        Weather selectedWeather = (Weather) _weatherComboBox.getSelectedItem();
 	    		Pair<String, Weather> info = new Pair<>(selectedRoad.getId(), selectedWeather);
 	    		List<Pair<String, Weather>> events = new ArrayList<>();
 	    		events.add(info);
@@ -110,11 +111,11 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
 	    _roads.clear();
-	    roadComboBox.removeAllItems();
+	    _roadComboBox.removeAllItems();
 
 	    for (Road r : map.getRoads()) {
 	        _roads.add(r);
-	        roadComboBox.addItem(r);
+	        _roadComboBox.addItem(r);
 	    }
 	    this._time =time;
 	}
@@ -135,11 +136,11 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
 	    _roads.clear();
-	    roadComboBox.removeAllItems();
+	    _roadComboBox.removeAllItems();
 
 	    for (Road r : map.getRoads()) {
 	        _roads.add(r);
-	        roadComboBox.addItem(r);
+	        _roadComboBox.addItem(r);
 	    }
 
 	    this._time = time;

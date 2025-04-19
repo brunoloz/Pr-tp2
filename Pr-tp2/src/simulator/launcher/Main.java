@@ -220,7 +220,7 @@ public class Main {
 		initFactories();
 		parseArgs(args);
 		switch (_mode) {
-        case "batch":
+        case "console":
             startBatchMode();
             break;
         case "gui":
