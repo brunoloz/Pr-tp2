@@ -29,8 +29,8 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	private Controller _ctrl;
 	private List<Road> _roads = new ArrayList<>();
 	private int _time = 0;
-    JComboBox<Road> _roadComboBox;
-    JComboBox<Weather> _weatherComboBox;
+    private JComboBox<Road> _roadComboBox;
+    private JComboBox<Weather> _weatherComboBox;
     private SpinnerNumberModel n_spinner;
 
 	public ChangeRoadWeatherDialog(Frame f, Controller ctrl) {
@@ -60,12 +60,10 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 	    JSpinner ticks = new JSpinner(n_spinner);
 	    centerPanel.add(new JLabel("Road: "));
 	    _roadComboBox = new JComboBox<Road>();
-	    //roadComboBox.setMaximumSize(new Dimension(200, 20));
 	    centerPanel.add(_roadComboBox);
 	    
 	    centerPanel.add(new JLabel("Weather: "));
 	    _weatherComboBox = new JComboBox<>(Weather.values());
-	    //weatherComboBox.setMaximumSize(new Dimension(200, 20));
 	    centerPanel.add(_weatherComboBox);
 	    
 	    centerPanel.add(new JLabel("Ticks: "));

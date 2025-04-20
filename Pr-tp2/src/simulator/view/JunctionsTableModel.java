@@ -59,7 +59,6 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 				val = roads.get(greenIdx).getId();
 			}
 			break;
-			//val = roads.get(j.getGreenLightIndex()).toString();
 		case 2:
 			for(Road r1 : roads) {
 				List<Vehicle> lv = new ArrayList<Vehicle>();

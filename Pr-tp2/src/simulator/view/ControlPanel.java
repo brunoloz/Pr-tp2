@@ -54,10 +54,8 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	private JSpinner _ticksSpinner;
 	private JButton _quitButton;
 	private JButton _soundButton;
-	private JDialog _co2Dialog;
 	private JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();;
 	private boolean _stopped;
-	//private int tck;
 	
 	//CANCION
 	private static Clip _clip;
@@ -80,9 +78,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
         _toolaBar.add(_openButton);
         
         _toolaBar.addSeparator();
-        
-//        _co2ClassButton = co2Button();
-//        _toolaBar.add(_co2ClassButton);
         
         ChangeCO2Dialog co2Dialog = new ChangeCO2Dialog(ViewUtils.getWindow(this), _ctr);
         _co2ClassButton = co2Button(co2Dialog);
@@ -132,9 +127,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 			}
 		});
 		_toolaBar.add(_quitButton);
-		
-		
-		
+			
         _fc = new JFileChooser();
         _fc.setCurrentDirectory(new File(System.getProperty("user.dir") + "/resources/examples"));
         
@@ -156,14 +149,10 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
             if (sel == JFileChooser.APPROVE_OPTION) {
                 try {
-                    //JSONObject inputJson = new JSONObject(new JSONTokener(new FileInputStream(_fc.getSelectedFile())));
                     FileInputStream inputStream = new FileInputStream(_fc.getSelectedFile());
                     _ctr.reset();
                     _ctr.loadEvents(inputStream);
                 
-                    
-                    //ViewUtils.showInfoMsg(open, "Archivo cargado correctamente.");
-                    //System.out.println(inputJson.toString(2));
                 } catch (JSONException e) {
                     ViewUtils.showErrorMsg(open, "El archivo no tiene el formato correcto");
                 } catch (FileNotFoundException ignored) {
@@ -174,23 +163,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 		return open;
 	}
-
-//	private JButton co2Button() {
-//		JButton open = new JButton(new ImageIcon("resources/icons/co2class.png"));
-//		open.addActionListener(l ->{
-//			
-//			
-//			ImageIcon iconco2 = new ImageIcon("resources/icons/co2class.png");
-//			Object[] options = {"Aceptar", "Cancelar"};
-//			int n = JOptionPane.showOptionDialog(this, "<html><b>Schedule an event to change the CO2 class of a vehicle after "
-//					+ "a given number of simulation ticks from now.", "Change C02 lass", 
-//					JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, iconco2, options, options[1]);
-//			
-//		});
-//
-//		return open;
-//	}
-	
 	
 	private JButton co2Button(ChangeCO2Dialog co2Dialog) {
 		JButton open = new JButton(new ImageIcon("resources/icons/co2class.png"));
@@ -201,8 +173,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 		return open;
 	}
 
-	
-
 	private JButton weatherButton(ChangeRoadWeatherDialog weatherDialog) {
 		JButton open = new JButton(new ImageIcon("resources/icons/weather.png"));
 		open.addActionListener(e ->{
@@ -211,8 +181,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 		});
 		return open;
 	}
-	
-
 	
 	private void enableToolBar(boolean enabled) {
 	    _openButton.setEnabled(enabled);
@@ -229,7 +197,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 		
 		open.addActionListener(new ActionListener() {
 			
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -294,7 +261,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 				isMuted = !isMuted; // Cambiar estado
 				BooleanControl muteControl = (BooleanControl) _clip.getControl(BooleanControl.Type.MUTE);
 				muteControl.setValue(isMuted); // Activar/desactivar mute
-				// muteButton.setText(isMuted ? "🔇 Unmute" : "🔊 Mute");
 	            }
 		});
 

@@ -38,32 +38,14 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		// TODO Auto-generated method stub
 		return _headers.length;
 	}
-
-//	@Override
-//	public Object getValueAt(int rowIndex, int columnIndex) {
-//		// TODO Auto-generated method stub
-//		Event e = _miInfo.get(rowIndex);
-//		String val = "";
-//		
-//		switch(columnIndex) {
-//		case 0:
-//			int t = e.getTime();
-//			val = Integer.toString(t);
-//			break;
-//		case 1:
-//			val = e.toString();
-//			break;
-//		}
-//		return val;
-//	}
 	
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 	    Event e = _miInfo.get(rowIndex);
 
 	    switch (columnIndex) {
-	        case 0: return e.getTime();  // Devuelve directamente el entero
-	        case 1: return e.toString(); // Representación en String del evento
+	        case 0: return e.getTime();  
+	        case 1: return e.toString(); 
 	        default: return null;        // Caso por defecto para evitar errores
 	    }
 	}
@@ -72,16 +54,14 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
-		_miInfo = new ArrayList<>(events);  // Guardamos la lista actualizada de eventos
+		_miInfo = new ArrayList<>(events); 
 		fireTableDataChanged();
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
 		// TODO Auto-generated method stub
-		//_miInfo.add(e);
 		_miInfo = new ArrayList<>(events); 
-		//_miInfo.// Guardamos la lista actualizada de eventos
 		fireTableDataChanged(); // Refrescamos la tabla
 		
 	}

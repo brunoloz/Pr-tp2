@@ -19,16 +19,8 @@ import simulator.model.TrafficSimObserver;
 
 public class StatusBar extends JPanel implements TrafficSimObserver{
 	
-	private Controller _ctr;
 	private JLabel _timeLabel;
 	private JLabel _eventLabel;
-	
-	//Dudas sobre el _roadMap (ns para que se utiliza en esta clase) y _events
-	private RoadMap _roadMap;
-	private Event _event;
-	private Collection<Event> _events;
-	private int _time;
-
 	
 	public StatusBar(Controller ctr) {
 		initGUI();
@@ -55,9 +47,6 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
 		SwingUtilities.invokeLater(()->{
-			this._roadMap = map;
-			this._events = events;
-			this._time = time;
 			this._timeLabel.setText("Time:  " + time);
 		});
 	}
@@ -66,10 +55,6 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
 		// TODO Auto-generated method stub
 		SwingUtilities.invokeLater(()->{
-			this._roadMap = map;
-			this._events = events;
-			this._event = e;
-			this._time = time;
 			this._timeLabel.setText("Time:  " + time);
 			this._eventLabel.setText(e.toString());
 		});
@@ -78,18 +63,12 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
-		this._roadMap = map;
-		this._events = events;
-		this._time = time;
 		this._timeLabel.setText("Time:  " + time);
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
 		// TODO Auto-generated method stub
-		this._roadMap = map;
-		this._events = events;
-		this._time = time;
 		this._timeLabel.setText("Time:  " + time);
 	}
 

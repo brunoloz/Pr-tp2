@@ -34,9 +34,6 @@ import simulator.model.Weather;
 
 public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 
-//	private JPanel _panelIzquierdo;
-//	private JComboBox<String> _comboBox;
-
 	private Controller _ctrl;
 	private List<Vehicle> _vehicle = new ArrayList<>();
 	private int _time = 0;
@@ -55,24 +52,6 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 	}
 
 	private void initGUI() {
-//		JPanel mainPanel = new JPanel();
-//	     mainPanel.setLayout(new FlowLayout());
-//	    
-//	     
-//	     _panelIzquierdo = new JPanel();
-//	     
-//	     BoxLayout layout  = new BoxLayout(_panelIzquierdo,BoxLayout.Y_AXIS);
-//		 _panelIzquierdo.setLayout(layout);
-//		 this._comboBox = new JComboBox<String>();
-//		 
-//		 
-//		 _panelIzquierdo.add(_comboBox);
-//		 mainPanel.add(_panelIzquierdo);
-//		 
-//		 
-//		 this.add(mainPanel);
-//		 this.setVisible(false);
-//		 this.pack();
 
 		this.setLayout(new BorderLayout());
 		this.setSize(800, 200);
@@ -89,7 +68,6 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 		JSpinner ticks = new JSpinner(n_spinner);
 		centerPanel.add(new JLabel("Vehicle: "));
 		_vehicleComboBox = new JComboBox<Vehicle>();
-		// roadComboBox.setMaximumSize(new Dimension(200, 20));
 		centerPanel.add(_vehicleComboBox);
 
 		centerPanel.add(new JLabel("CO2 Class: "));
@@ -97,7 +75,7 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 		for(int i = 0; i < 11; i++) {
 			_CO2ComboBox.addItem(i);
 		}
-		// weatherComboBox.setMaximumSize(new Dimension(200, 20));
+
 		centerPanel.add(_CO2ComboBox);
 
 		centerPanel.add(new JLabel("Ticks: "));
