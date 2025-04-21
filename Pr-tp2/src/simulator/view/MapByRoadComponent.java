@@ -247,25 +247,21 @@ public class MapByRoadComponent extends JPanel implements TrafficSimObserver{
 	
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
 		update(map);
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
 		update(map);
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
 		update(map);
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
 		update(map);
 	}
 	
