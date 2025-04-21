@@ -83,8 +83,7 @@ public class MainWindow extends JFrame {
 		
 		mapByRoadView.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Map By Road", TitledBorder.LEFT, TitledBorder.TOP));
 		
-		// TODO add a map for MapByRoadComponent
-		// ...
+		
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
@@ -93,7 +92,7 @@ public class MainWindow extends JFrame {
 
 	private JPanel createViewPanel(JComponent c, String title) {
 		JPanel p = new JPanel( new BorderLayout() );
-            // TODO add a framed border to p with title
+            
 		p.add(new JScrollPane(c));
 		return p;
 	}

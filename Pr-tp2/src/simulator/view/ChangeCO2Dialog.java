@@ -1,36 +1,27 @@
 package simulator.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
 
 //import dialog.compras.DialogoCompras;
 import simulator.control.Controller;
 import simulator.misc.Pair;
 import simulator.model.Event;
-import simulator.model.Road;
 import simulator.model.RoadMap;
 import simulator.model.SetContClassEvent;
-import simulator.model.SetWeatherEvent;
 import simulator.model.TrafficSimObserver;
 import simulator.model.Vehicle;
-import simulator.model.Weather;
 
 public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 
@@ -119,7 +110,7 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		_vehicle.clear();
 	    _vehicleComboBox.removeAllItems();
 
@@ -134,20 +125,20 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		this._vehicle.clear();
 
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		_vehicle.clear();
 	    _vehicleComboBox.removeAllItems();
 

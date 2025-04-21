@@ -1,9 +1,8 @@
 package simulator.view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -16,7 +15,6 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,16 +27,12 @@ import javax.swing.SwingUtilities;
 import javax.sound.sampled.*;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import simulator.control.Controller;
 import simulator.model.Event;
-import simulator.model.Road;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 import simulator.model.Vehicle;
-import simulator.model.Weather;
 
 public class ControlPanel extends JPanel implements TrafficSimObserver {
 	
@@ -114,7 +108,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 		//CANCION
         _soundButton = soundButton();
         _toolaBar.add(_soundButton);
-        playMusic("resources/icons/Atleti.wav");
+        playMusic("src/song/Atleti.wav");
         
         _toolaBar.addSeparator();
         
@@ -199,7 +193,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				int tck = (int) _ticksSpinner.getValue();
 		        _stopped = false;
 		        enableToolBar(false);
@@ -235,7 +229,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 		        _stopped = true;
 			}
 			
@@ -288,13 +282,13 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		for(int i = 0; i < map.getVehicles().size(); i++) {
 			vehicleComboBox.addItem(map.getVehicles().get(i));
 		}
@@ -303,13 +297,13 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

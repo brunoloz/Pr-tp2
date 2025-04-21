@@ -1,12 +1,10 @@
 package simulator.view;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.Collection;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -45,7 +43,7 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		SwingUtilities.invokeLater(()->{
 			this._timeLabel.setText("Time:  " + time);
 		});
@@ -53,7 +51,7 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		SwingUtilities.invokeLater(()->{
 			this._timeLabel.setText("Time:  " + time);
 			this._eventLabel.setText(e.toString());
@@ -62,13 +60,13 @@ public class StatusBar extends JPanel implements TrafficSimObserver{
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		this._timeLabel.setText("Time:  " + time);
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		this._timeLabel.setText("Time:  " + time);
 	}
 

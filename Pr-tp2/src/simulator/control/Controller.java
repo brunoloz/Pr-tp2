@@ -3,7 +3,6 @@ package simulator.control;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,8 +10,6 @@ import org.json.JSONTokener;
 
 import simulator.factories.Factory;
 import simulator.model.Event;
-import simulator.model.Observable;
-import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 import simulator.model.TrafficSimulator;
 
@@ -94,14 +91,12 @@ public class Controller {
 
 	//@Override
 	public void addObserver(TrafficSimObserver o) {
-		// TODO Auto-generated method stub
 		_trafficSimulator.addObserver(o);
 		
 	}
 
 	//@Override
 	public void removeObserver(TrafficSimObserver o) {
-		// TODO Auto-generated method stub
 		_trafficSimulator.removeObserver(o);
 		
 	}

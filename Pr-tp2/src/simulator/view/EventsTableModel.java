@@ -29,13 +29,13 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
+		
 		return this._miInfo.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
+		
 		return _headers.length;
 	}
 	
@@ -53,14 +53,14 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		_miInfo = new ArrayList<>(events); 
 		fireTableDataChanged();
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		_miInfo = new ArrayList<>(events); 
 		fireTableDataChanged(); // Refrescamos la tabla
 		
@@ -68,13 +68,13 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		_miInfo = new ArrayList<>(events);  // Guardamos la lista actualizada de eventos
 		fireTableDataChanged();
 	}

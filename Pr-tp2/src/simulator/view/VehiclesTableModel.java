@@ -23,19 +23,19 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 	}
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
+		
 		return _miInfo.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
+		
 		return _headers.length;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) { //Si se usan enumerados puede ser automático y no se necesitan switch o if/else
-		// TODO Auto-generated method stub
+		
 		Vehicle v = _miInfo.get(rowIndex); // Obtener el vehículo de la fila correspondiente
 	    
 	    switch (columnIndex) {
@@ -58,7 +58,7 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		_miInfo = map.getVehicles();
 		fireTableStructureChanged();
 		
@@ -66,19 +66,19 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

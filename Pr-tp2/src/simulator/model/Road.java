@@ -3,7 +3,6 @@ package simulator.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -37,14 +36,13 @@ public abstract class Road extends SimulatedObject {
 		if (srcJunc == null || destJunc == null || weather == null) {
 			throw new IllegalArgumentException("NO PUEDE HABER UN VALOR NULL");
 		}
-		// TODO hacer bien
 		_srcJunc = srcJunc;
 		_destJunc = destJunc;
-		_srcJunc.addOutGoingRoad(this); // TODO ASI?? EN EL PDF PONE QUE HAY QUE LLAMAR A ESTOS METODOS
-		_destJunc.addIncommingRoad(this); // TODO ASI??
+		_srcJunc.addOutGoingRoad(this);
+		_destJunc.addIncommingRoad(this);
 
 		_maxSpeed = maxSpeed;
-		_speedLimit = maxSpeed; // añadido
+		_speedLimit = maxSpeed;
 		_contLimit = contLimit;
 		_length = length;
 		_weather = weather;
@@ -94,10 +92,10 @@ public abstract class Road extends SimulatedObject {
 		}
 
 		// Ordena la lista de vehículos por su localizacion
-		Collections.sort(_vehicles, new Comparator<Vehicle>() { //TODO 
+		Collections.sort(_vehicles, new Comparator<Vehicle>() { 
 			@Override
 			public int compare(Vehicle v1, Vehicle v2) {
-				// TODO Auto-generated method stub
+				
 				return Integer.compare(v2.getLocation(), v1.getLocation());
 			}
 

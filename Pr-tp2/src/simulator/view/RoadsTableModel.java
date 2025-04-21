@@ -24,13 +24,13 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	}
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
+		
 		return this._miInfo.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
+		
 		return this._headers.length;
 	}
 	
@@ -40,7 +40,7 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+		
 		Road r = this._miInfo.get(rowIndex);
 		String val = "";
 		switch(columnIndex) {
@@ -79,26 +79,26 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		this._miInfo = map.getRoads();
 		fireTableStructureChanged();
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		fireTableStructureChanged();
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

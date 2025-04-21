@@ -1,7 +1,6 @@
 package simulator.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -107,7 +106,7 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 	    _roads.clear();
 	    _roadComboBox.removeAllItems();
 
@@ -120,19 +119,19 @@ public class ChangeRoadWeatherDialog extends JDialog implements TrafficSimObserv
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		this._roads.clear();
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 	    _roads.clear();
 	    _roadComboBox.removeAllItems();
 

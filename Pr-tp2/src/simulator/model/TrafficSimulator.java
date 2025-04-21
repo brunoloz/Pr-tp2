@@ -1,8 +1,6 @@
 package simulator.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -30,11 +28,11 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
-		//_observer.add(e);
+		
 		for(TrafficSimObserver t : _observer) {
 			t.onEventAdded(_roadMap, _priorityQueue, e, _time);
 		}
-		//_observer.onEventAdded(_roadMap, _priorityQueue, e, _time);
+		
 
 	}
 
@@ -89,11 +87,11 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 
 	@Override
 	public void addObserver(TrafficSimObserver o) {
-		// TODO Auto-generated method stub
+		
 		if (o == null) {
 	        throw new IllegalArgumentException("Observer cannot be null");
 	    }
-	   // this._observer = o; // Asignar el observador
+	   
 		_observer.add(o);
 	    o.onRegister(_roadMap, _priorityQueue, _time);
 	}
@@ -101,7 +99,7 @@ public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 
 	@Override
 	public void removeObserver(TrafficSimObserver o) {
-		// TODO Auto-generated method stub
+		
 		if (o == null) {
 	        throw new IllegalArgumentException("Observer cannot be null");
 	    }

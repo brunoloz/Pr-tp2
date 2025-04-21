@@ -27,13 +27,13 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
+		
 		return this._junctions.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
+		
 		return this._headers.length;
 	}
 	
@@ -43,7 +43,7 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+		
 		Junction j = this._junctions.get(rowIndex);
 		List<Road> roads = j.getInRoads();
 		String val = "";
@@ -74,27 +74,27 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		_junctions = new ArrayList<>(map.getJunctions());
 		fireTableDataChanged();
 	}
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 		_junctions = new ArrayList<>(map.getJunctions());
 		fireTableDataChanged();
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

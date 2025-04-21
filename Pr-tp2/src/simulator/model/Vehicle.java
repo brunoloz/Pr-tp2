@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
@@ -198,7 +197,6 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 
 	@Override
 	public int compareTo(Vehicle o) { 
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
