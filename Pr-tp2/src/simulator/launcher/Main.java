@@ -58,10 +58,11 @@ public class Main {
 		try {
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseHelpOption(line, cmdLineOptions);
+			parseModeOption(line);
 			parseInFileOption(line);
 			parseOutFileOption(line);
 			parseTicksFileOption(line);
-			parseModeOption(line);
+			
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -131,7 +132,7 @@ public class Main {
 
 	private static void parseInFileOption(CommandLine line) throws ParseException {
 		_inFile = line.getOptionValue("i");
-		if (_mode == "batch" && _inFile == null) {
+		if (_mode.equals("console") && _inFile == null) {
 			throw new ParseException("An events file is missing");
 		}
 	}
@@ -206,7 +207,12 @@ public class Main {
 
 		TrafficSimulator sim = new TrafficSimulator();
 		Controller ctrl = new Controller(sim, _eventsFactory);
-
+		
+		if(_inFile != null){
+		InputStream in = new FileInputStream(_inFile);
+		ctrl.loadEvents(in);
+		}
+		
 		SwingUtilities.invokeLater(new Runnable() {	
 			@Override
 			public void run() {

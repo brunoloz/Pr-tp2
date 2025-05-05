@@ -87,7 +87,7 @@
           "id"        : "v1",
           "maxspeed"  : 100,
           "class"     : 3,
-          "itinerary" : ["j1", "j3", "j4"]
+          "itinerary" : ["j1", "j2", "j4"]
       }
     },
    	{

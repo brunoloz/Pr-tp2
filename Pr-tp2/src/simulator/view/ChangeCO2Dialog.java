@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -98,6 +99,7 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 		bottomPanel.add(cancelButton);
 
 		this.add(topPanel, BorderLayout.NORTH);
+		//Box.createRigidArea(getPreferredSize())
 		this.add(centerPanel, BorderLayout.CENTER);
 		this.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -105,6 +107,7 @@ public class ChangeCO2Dialog extends JDialog implements TrafficSimObserver {
 	}
 	
 	public void open() {
+		
 		setVisible(true);
 	}
 

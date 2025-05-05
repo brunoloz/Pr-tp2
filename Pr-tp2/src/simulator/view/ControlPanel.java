@@ -34,7 +34,7 @@ import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 import simulator.model.Vehicle;
 
-public class ControlPanel extends JPanel implements TrafficSimObserver {
+public class ControlPanel extends JPanel {
 	
 	private Controller _ctr;
 	private JFileChooser _fc;
@@ -48,7 +48,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	private JSpinner _ticksSpinner;
 	private JButton _quitButton;
 	private JButton _soundButton;
-	private JComboBox<Vehicle> vehicleComboBox = new JComboBox<Vehicle>();;
 	private boolean _stopped;
 	
 	//CANCION
@@ -57,7 +56,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
 	
 	public ControlPanel(Controller ctr) {
 		_ctr = ctr;
-		_ctr.addObserver(this);
+		
 		_ticksSpinner = new JSpinner();
 		initGUI();
 	}
@@ -280,31 +279,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver {
         }
     }
 
-	@Override
-	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-		
-		
-	}
 
-	@Override
-	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		
-		for(int i = 0; i < map.getVehicles().size(); i++) {
-			vehicleComboBox.addItem(map.getVehicles().get(i));
-		}
-		
-	}
-
-	@Override
-	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		
-		
-	}
-
-	@Override
-	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		
-		
-	}
 
 }
