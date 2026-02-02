@@ -29,21 +29,20 @@ public class RoadMap {
 	}
 
 	public void addJunction(Junction j) throws IllegalArgumentException {
-		for (Junction j1 : _junctions) {
-			if (j1.getId().equals(j.getId())) {
+		if(_juncMap.containsKey(j.getId()))
 				throw new IllegalArgumentException("Ya existe un cruce con este id");
-			}
-		}
+			
+		
 		_junctions.add(j);
 		_juncMap.put(j.getId(), j);
 	}
 
 	public void addRoad(Road r) throws IllegalArgumentException {
-		for (Road r1 : _roads) {
-			if (r1.getId().equals(r.getId())) {
+		
+			if (_roadMap.containsKey(r.getId())) {
 				throw new IllegalArgumentException("Ya existe una carretera con este id");
 			}
-		}
+		
 
 		if (!_juncMap.containsKey(r.getSrc().getId()) || !_juncMap.containsKey(r.getDest().getId())) {
 			throw new IllegalArgumentException("No existe esta carretera en el mapa");
@@ -54,22 +53,19 @@ public class RoadMap {
 	}
 
 	public void addVehicle(Vehicle v) {
-		for (Vehicle v1 : _vehicles) {
-			if (v1.getId().equals(v.getId())) {
-				throw new IllegalArgumentException("Ya existe un vehiculo con este id");
-			}
+		if (_vehicleMap.containsKey(v.getId())) {
+			throw new IllegalArgumentException("Ya existe un vehiculo con este id");
 		}
-
 		List<Junction> itinerary = v.getItinerary();
 		int i;
-		boolean b = false;
+		boolean b = true;
 		for (i = 1; i < itinerary.size(); i++) {
-			for(Road r : _roads) {
-				if (r.getSrc().equals(itinerary.get(i-1)) && r.getDest().equals(itinerary.get(i)))
-					b = true;
-			}
+
+			if (itinerary.get(i - 1).roadTo(itinerary.get(i)) == null)
+				b = false;
+
 		}
-		if(!b)
+		if (!b)
 			throw new IllegalArgumentException("El itinerario de cruces no es válido");
 
 		_vehicles.add(v);

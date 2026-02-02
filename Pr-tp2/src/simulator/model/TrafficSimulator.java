@@ -1,30 +1,38 @@
 package simulator.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 import org.json.JSONObject;
 
-public class TrafficSimulator {
+public class TrafficSimulator implements  Observable<TrafficSimObserver>{
 
 	private RoadMap _roadMap;
 	private Queue<Event> _priorityQueue;
 	private int _time;
+	private List<TrafficSimObserver> _observer;
+	
 
 	public TrafficSimulator() {
 		this._roadMap = new RoadMap();
 		this._priorityQueue = new PriorityQueue<Event>();
+		this._observer = new ArrayList<TrafficSimObserver>();
 		this._time = 0;
 	}
 
+	
 	public void addEvent(Event e) {
 		if(e.getTime() <= _time)
 			throw new IllegalArgumentException("No puedes añadir eventos en el pasado");
 		
 		_priorityQueue.add(e);
+		
+		for(TrafficSimObserver t : _observer) {
+			t.onEventAdded(_roadMap, _priorityQueue, e, _time);
+		}
+		
 
 	}
 
@@ -46,12 +54,22 @@ public class TrafficSimulator {
 			r.advance(_time);
 		}
 		
+		for(TrafficSimObserver t : _observer) {
+			t.onAdvance(_roadMap, _priorityQueue, _time);
+		}
+		
+		
 	}
 
 	public void reset() {
 		_roadMap.reset();
 		_priorityQueue.clear();
 		_time = 0;
+		
+		for(TrafficSimObserver t : _observer) {
+			t.onReset(_roadMap, _priorityQueue, _time);
+		}
+
 	}
 
 	public JSONObject report() {
@@ -63,5 +81,30 @@ public class TrafficSimulator {
 		return j;
 
 	}
+	
+	
+
+
+	@Override
+	public void addObserver(TrafficSimObserver o) {
+		
+		if (o == null) {
+	        throw new IllegalArgumentException("Observer cannot be null");
+	    }
+	   
+		_observer.add(o);
+	    o.onRegister(_roadMap, _priorityQueue, _time);
+	}
+
+
+	@Override
+	public void removeObserver(TrafficSimObserver o) {
+		
+		if (o == null) {
+	        throw new IllegalArgumentException("Observer cannot be null");
+	    }
+		_observer.remove(o);
+	}
+
 
 }

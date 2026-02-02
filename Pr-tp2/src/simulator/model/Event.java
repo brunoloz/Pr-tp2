@@ -16,7 +16,7 @@ public abstract class Event implements Comparable<Event> {
 		}
 	}
 
-	int getTime() {
+	public int getTime() {
 		return _time;
 	}
 

@@ -1,0 +1,105 @@
+package simulator.view;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.table.AbstractTableModel;
+
+import simulator.control.Controller;
+import simulator.model.Event;
+import simulator.model.Road;
+import simulator.model.RoadMap;
+import simulator.model.TrafficSimObserver;
+import simulator.model.Weather;
+
+public class RoadsTableModel extends AbstractTableModel implements TrafficSimObserver{
+
+	
+	private List<Road> _miInfo = new ArrayList<Road>();
+	private String[] _headers = {"Road_id", "Length", "Weather", "Max_speed", "Current_speed", "Total_CO2", "CO2_limit"};
+	
+	public RoadsTableModel(Controller ctrl) {
+		ctrl.addObserver(this);
+	}
+	@Override
+	public int getRowCount() {
+		
+		return this._miInfo.size();
+	}
+
+	@Override
+	public int getColumnCount() {
+		
+		return this._headers.length;
+	}
+	
+	public String getColumnName(int columnIndex) {
+		return _headers[columnIndex];
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		
+		Road r = this._miInfo.get(rowIndex);
+		String val = "";
+		switch(columnIndex) {
+		case 0:
+			val = r.getId();
+			break;
+		case 1:
+			int l = r.getLength();
+			val = Integer.toString(l);
+			break;
+		case 2:
+			Weather w = r.getWeather();
+			val = w.toString();
+			break;
+		case 3:
+			int s = r.getMaxSpeed();
+			val = Integer.toString(s);
+			break;
+		case 4:
+			int sl = r.getSpeedLimit();
+			val = Integer.toString(sl);
+			break;
+		case 5:
+			int t_co2 = r.getTotalCO2();
+			val = Integer.toString(t_co2);
+			break;
+		case 6:
+			int co2_l = r.getContLimit();
+			val = Integer.toString(co2_l);
+			break;
+			
+		}
+				
+		return val;
+	}
+
+	@Override
+	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
+		
+		this._miInfo = map.getRoads();
+		fireTableStructureChanged();
+	}
+
+	@Override
+	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
+		
+		fireTableStructureChanged();
+	}
+
+	@Override
+	public void onReset(RoadMap map, Collection<Event> events, int time) {
+		
+		
+	}
+
+	@Override
+	public void onRegister(RoadMap map, Collection<Event> events, int time) {
+		
+		
+	}
+
+}

@@ -1,0 +1,85 @@
+package simulator.view;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.table.AbstractTableModel;
+
+import simulator.control.Controller;
+import simulator.model.Event;
+import simulator.model.RoadMap;
+import simulator.model.TrafficSimObserver;
+import simulator.model.Vehicle;
+
+public class VehiclesTableModel extends AbstractTableModel implements TrafficSimObserver{
+
+	private List<Vehicle> _miInfo = new ArrayList<Vehicle>();
+	String[] _headers = {"Id", "Location", "Itinerary", "CO2 Class", "Max. Speed", "Speed", "Total CO2", "Distance"};
+	
+	
+	public VehiclesTableModel(Controller ctr) {
+		ctr.addObserver(this);
+	}
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return _miInfo.size();
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return _headers.length;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) { //Si se usan enumerados puede ser automático y no se necesitan switch o if/else
+		// TODO Auto-generated method stub
+		Vehicle v = _miInfo.get(rowIndex); // Obtener el vehículo de la fila correspondiente
+	    
+	    switch (columnIndex) {
+	        case 0: return v.getId(); // ID del vehículo
+	        case 1: return v.getLocation(); // Ubicación actual
+	        case 2: return v.getItinerary(); // Itinerario
+	        case 3: return v.getContClass(); // Clase de CO2
+	        case 4: return v.getMaxSpeed(); // Velocidad máxima
+	        case 5: return v.getSpeed(); // Velocidad actual
+	        case 6: return v.getTotalCO2(); // Emisión total de CO2
+	        case 7: return v.getDistance(); // Distancia recorrida
+	        default: return null;
+	    }
+		
+	}
+	
+	public String getColumnName(int columnIndex) {
+		return _headers[columnIndex];
+	}
+
+	@Override
+	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
+		// TODO Auto-generated method stub
+		_miInfo = map.getVehicles();
+		fireTableStructureChanged();
+		
+	}
+
+	@Override
+	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReset(RoadMap map, Collection<Event> events, int time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRegister(RoadMap map, Collection<Event> events, int time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

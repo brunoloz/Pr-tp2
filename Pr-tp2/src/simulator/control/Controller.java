@@ -1,9 +1,9 @@
 package simulator.control;
 
+import java.awt.desktop.ScreenSleepEvent;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,12 +11,14 @@ import org.json.JSONTokener;
 
 import simulator.factories.Factory;
 import simulator.model.Event;
+import simulator.model.TrafficSimObserver;
 import simulator.model.TrafficSimulator;
 
 public class Controller {
 
 	private TrafficSimulator _trafficSimulator;
 	private Factory<Event> _eventsFactory;
+	
 
 	public Controller(TrafficSimulator sim, Factory<Event> eventsFactory) {
 		if (sim == null || eventsFactory == null) {
@@ -24,6 +26,7 @@ public class Controller {
 		}
 		this._trafficSimulator = sim;
 		this._eventsFactory = eventsFactory;
+		
 
 	}
 
@@ -46,6 +49,10 @@ public class Controller {
         }
 	}
 
+	
+	
+
+	
 	public void run(int n, OutputStream out) {
 
 		if (n < 0 || out == null) {
@@ -81,5 +88,29 @@ public class Controller {
 
 	public void reset() {
 		_trafficSimulator.reset();
+	}
+
+	//@Override
+	public void addObserver(TrafficSimObserver o) {
+		_trafficSimulator.addObserver(o);
+		
+	}
+
+	//@Override
+	public void removeObserver(TrafficSimObserver o) {
+		_trafficSimulator.removeObserver(o);
+		
+	}
+	
+	public void addEvent(Event e) {
+		_trafficSimulator.addEvent(e);
+	}
+	
+	public void run(int n) {
+		
+		for(int i = 0; i < n; i++) {
+			_trafficSimulator.advance();
+		}
+		
 	}
 }

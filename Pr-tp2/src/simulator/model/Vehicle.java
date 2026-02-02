@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
@@ -109,7 +108,7 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 			_state = VehicleStatus.TRAVELING;
 
 		} else {
-			if (_currentRoad != null || _contJunctions > 0) { // Si está en una carretera
+			if (_currentRoad != null) { // Si está en una carretera
 				_location = 0;
 				_currentRoad.exit(this);
 				
@@ -160,41 +159,44 @@ public class Vehicle extends SimulatedObject implements Comparable<Vehicle> {
 		return jo1;
 	}
 
-	int getLocation() {
+	public int getLocation() {
 		return _location;
 	}
 
-	int getSpeed() {
+	public int getSpeed() {
 		return _currentSpeed;
 	}
 
-	int getMaxSpeed() {
+	public int getMaxSpeed() {
 		return _maxSpeed;
 	}
 
-	int getContClass() {
+	public int getContClass() {
 		return _contClass;
 	}
 
-	VehicleStatus getStatus() {
+	public VehicleStatus getStatus() {
 		return _state;
 	}
 
-	int getTotalCO2() {
+	public int getTotalCO2() {
 		return _totalCO2;
 	}
 
-	List<Junction> getItinerary() {
+	public List<Junction> getItinerary() {
 		return _itinerary;
 	}
 
-	Road getRoad() {
+	public Road getRoad() {
 		return _currentRoad;
+	}
+	
+	public int getDistance() {
+		return _distance;
 	}
 
 	@Override
 	public int compareTo(Vehicle o) { 
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
