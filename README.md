@@ -1,4 +1,4 @@
-## Simulador de Tráfico (MVC)
+Simulador de Tráfico (MVC)
 ----------------------------------------------------
 Este repositorio contiene el desarrollo integral de un simulador de tráfico basado en eventos, realizado para la asignatura Tecnología de la Programación II. 
 El proyecto evoluciona desde un motor de ejecución por consola hasta una aplicación completa con interfaz gráfica.
